@@ -6,11 +6,11 @@ module.exports = [
     .exists()
     .withMessage('Email is required.')
     .isEmail()
-    .withMessage('Please enter a valid email address.')
+    .withMessage('Email is not valid.')
     .custom(async email => {
       let user = await User.findOne({ email });
       if (user === null) {
-        return true;
+        return Promise.resolve();
       } else {
         return Promise.reject('Email already exists.');
       }

@@ -7,7 +7,7 @@ const keys = require('./config/keys');
 
 const app = express();
 const db = mongoose
-  .connect(keys.mongoURI, { useNewUrlParser: true })
+  .connect(keys.testMongoURI, { useNewUrlParser: true })
   .then(() => {})
   .catch(err => {});
 
@@ -25,6 +25,8 @@ app.get('/', (req, res) => {
 app.use('/api/users', UsersRouter);
 
 const port = process.env.port || 3000;
-app.listen(port, function() {
-  console.log(`Listening on port ${port}`);
+const server = app.listen(port, function() {
+  // console.log(`Listening on port ${port}`);
 });
+
+module.exports = server;

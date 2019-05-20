@@ -5,12 +5,14 @@ module.exports = [
   body('email')
     .exists()
     .withMessage('Email is required.')
+    .isEmail()
+    .withMessage('Email is not valid.')
     .custom(async email => {
       let user = await User.findOne({ email });
       if (user === null) {
         return Promise.reject('Account does not exist.');
       } else {
-        return true;
+        return Promise.resolve();
       }
     }),
   body('password')

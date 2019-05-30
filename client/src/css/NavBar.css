@@ -1,0 +1,44 @@
+.NavBar {
+  background-color: white;
+  box-shadow: 0px 3px 2px dimgray;
+  width: 100%;
+  height: 5vh;
+  overflow: hidden;
+}
+
+.NavBar-Link {
+  text-decoration: none;
+}
+
+.NavBar-li {
+  padding: 1rem;
+  margin: auto 2rem;
+  height: 100%;
+  font-size: 2rem;
+}
+
+.NavBar-Link:visited {
+  color: black;
+}
+
+.NavBar-li:hover {
+  color: royalblue;
+  background-color: gold;
+  transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.NavBar-ul {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  resize: both;
+}
+
+.NavBar-Register {
+  align-self: flex-end;
+}
+
+.NavBar-Login {
+  align-self: flex-end;
+}

@@ -31,7 +31,7 @@ module.exports = LoginController = async (req, res, next) => {
     audience: 'jwitters',
     expiresIn: 3600
   };
-  jwt.sign(payload, keys.secretOrKey, signOptions, (err, encoded) => {
+  await jwt.sign(payload, keys.secretOrKey, signOptions, (err, encoded) => {
     if (err) {
       return res.status(500).json({
         errors: {
@@ -40,6 +40,13 @@ module.exports = LoginController = async (req, res, next) => {
       });
     }
 
-    return res.json({ token: `Bearer ${encoded}` });
+    user.password = null;
+    return res
+      .cookie('token', encoded, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 216000000)
+      })
+      .status(200)
+      .json({ success: true, name: user.name });
   });
 };

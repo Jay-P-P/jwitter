@@ -23,9 +23,8 @@ module.exports = RegisterController = (req, res, next) => {
       newUser.password = hash;
       try {
         let user = await newUser.save();
-        console.log(user);
         user.password = null;
-        res.json(user);
+        return res.status(201).json(user);
       } catch (err) {
         return res.json({
           error: err

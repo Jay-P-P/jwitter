@@ -16,9 +16,35 @@ router.post('/register', RegisterValidator, RegisterController);
 router.post('/login', LoginValidator, LoginController);
 
 router.get(
-  '/:id',
-  passport.authenticate('jwt', { session: false, failureRedirect: '/login' }),
-  UsersController.GetUserById
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  UsersController.GetAllUsers
+);
+
+router.get('/:name', UsersController.GetUser);
+
+router.get(
+  '/:name/followers',
+  passport.authenticate('jwt', { session: false }),
+  UsersController.GetFollowers
+);
+
+router.get(
+  '/:name/following',
+  passport.authenticate('jwt', { session: false }),
+  UsersController.GetFollowing
+);
+
+router.post(
+  '/:name/follow',
+  passport.authenticate('jwt', { session: false }),
+  UsersController.ToggleFollow
+);
+
+router.patch(
+  '/:name',
+  passport.authenticate('jwt', { session: false }),
+  UsersController.UpdateUser
 );
 
 module.exports = router;

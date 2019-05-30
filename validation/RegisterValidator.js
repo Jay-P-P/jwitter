@@ -35,7 +35,7 @@ module.exports = [
     .withMessage('Password is required.')
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
     .withMessage('Password does not meet strong password requirements.'),
-  body('passwordConfirm')
+  body('passwordConfirmation')
     .exists()
     .withMessage('Password confirmation is required.')
     .custom((confirmPassword, { req }) => {

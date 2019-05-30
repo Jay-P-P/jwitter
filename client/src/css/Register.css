@@ -1,0 +1,23 @@
+.RegisterInputBar {
+  width: 100%;
+}
+
+.RegisterInputBar:focus {
+  box-shadow: 0 0 5px rgba(200, 100, 0, 0.8);
+  border: 2px solid rgba(200, 100, 0, 0.8);
+}
+
+.Register-RegisterBtn {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  background-color: hsl(0, 50%, 50%);
+  box-shadow: 0px 3px 5px -1px black;
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  border-radius: 15px;
+}
+
+.Register-RegisterBtn:hover {
+  background-color: hsl(0, 50%, 40%);
+  box-shadow: 0px 10px 5px -5px black;
+}

@@ -3,13 +3,18 @@ import axios from 'axios';
 import config from '../../config/RequestHeaders';
 import UserContext from './UserContext';
 import FollowButton from '../FollowButton';
-import '../../css/User.css';
+import '../../css/UserCard.css';
 import '../../css/App.css';
 
-const User = props => {
+const UserCard = props => {
   let context = useContext(UserContext);
   const [userState, setUserState] = useState({});
   const { followers, following, name, jweets, bio } = userState;
+
+  const buttonStyles = {
+    canFollow: 'UserCard-Button UserCard-ButtonFollow',
+    isFollowing: 'UserCard-Button UserCard-ButtonFollowing'
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,32 +26,36 @@ const User = props => {
   }, [props.paramName, context]);
 
   return (
-    <div className="whiteBox User-Box">
-      <div className="User-Heading">
+    <div className="whiteBox UserCard-Box">
+      <div className="UserCard-Heading">
         <h1 className="Heading">{name}</h1>
-        <p className="User-Bio">{bio}</p>
+        {bio ? <p className="UserCard-Bio">{bio}</p> : ''}
         {context.user.name === name ? (
           ''
         ) : (
-          <FollowButton buttonStyle="User-Button" name={name} />
+          <FollowButton buttonStyles={buttonStyles} name={name} />
         )}
       </div>
-      <div className="User-StatBox">
-        <h3 className="User-StatHeading">
+      <div className="UserCard-StatBox">
+        <h3 className="UserCard-StatHeading">
           Followers
-          <span className="User-Stat">{followers ? followers.length : 0}</span>
+          <span className="UserCard-Stat">
+            {followers ? followers.length : 0}
+          </span>
         </h3>
-        <h3 className="User-StatHeading">
+        <h3 className="UserCard-StatHeading">
           Following
-          <span className="User-Stat">{following ? following.length : 0}</span>
+          <span className="UserCard-Stat">
+            {following ? following.length : 0}
+          </span>
         </h3>
-        <h3 className="User-StatHeading">
+        <h3 className="UserCard-StatHeading">
           Jweets
-          <span className="User-Stat">{jweets ? jweets.length : 0}</span>
+          <span className="UserCard-Stat">{jweets ? jweets.length : 0}</span>
         </h3>
       </div>
     </div>
   );
 };
 
-export default User;
+export default UserCard;

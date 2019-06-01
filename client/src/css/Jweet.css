@@ -1,0 +1,40 @@
+.Jweet-List {
+  margin: 0;
+}
+
+.Jweet-User {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  background-color: black;
+  color: white;
+}
+
+.Jweet-Name {
+  padding: 0.5rem 1rem;
+  font-size: 1.6rem;
+  width: 50%;
+}
+
+.Jweet-Date {
+  width: 50%;
+  padding: 1rem;
+  text-align: right;
+  color: #aaa;
+}
+
+.Jweet-TextBox {
+  width: 100%;
+  padding: 2rem;
+}
+
+.Jweet-Text {
+  font-size: 2rem;
+}
+
+.Jweet-StatBox {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  font-size: 1.6rem;
+}

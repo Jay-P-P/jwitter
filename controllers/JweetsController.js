@@ -2,11 +2,25 @@ const Jweet = require('../models/Jweet');
 const User = require('../models/User');
 
 const JweetsController = {
+  GetTimeline: async (req, res, next) => {
+    const { id } = req.user;
+
+    let response = await User.findById(id, 'following');
+    let followingList = response.following;
+    followingList.push(id);
+    let jweets = await Jweet.find({ user: { $in: followingList } })
+      .populate('user', 'name')
+      .sort({
+        date: -1
+      });
+
+    return res.status(200).json({ jweets });
+  },
   GetJweets: async (req, res, next) => {
     const { name } = req.params;
 
     let user = await User.findOne({ name });
-    let jweets = await Jweet.find({ user: user.id });
+    let jweets = await Jweet.find({ user: user.id }).populate('user', 'name');
 
     res.status(200).json({ jweets });
   },

@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react';
-//import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import '../css/Home.css';
 import '../css/App.css';
 import LoginContext from './Auth/LoginContext';
@@ -10,15 +10,15 @@ const Home = props => {
     <div className="container">
       {!context.isLoggedIn ? (
         <Fragment>
-          {/* <Link className="Button Home-RegisterBtn" to="/register">
+          <Link className="Button Home-RegisterBtn" to="/register">
             Register
           </Link>
           <Link className="Button Home-LoginBtn" to="/login">
             Login
-          </Link> */}
+          </Link>
         </Fragment>
       ) : (
-        ''
+        <Redirect to="/home" />
       )}
     </div>
   );

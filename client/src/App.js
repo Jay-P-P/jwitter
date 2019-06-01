@@ -12,13 +12,13 @@ import UsersList from './components/Users/UsersList';
 import LoginContext from './components/Auth/LoginContext';
 import config from './config/RequestHeaders';
 import UserContext from './components/Users/UserContext';
+import UserHome from './components/Users/UserHome';
 
 function App() {
   const loginUser = () => {
     loginState.isLoggedIn
       ? setLoginState({ ...loginState, isLoggedIn: false })
       : setLoginState({ ...loginState, isLoggedIn: true });
-    console.log(loginState);
   };
   const [loginState, setLoginState] = useState({
     isLoggedIn: false,
@@ -42,6 +42,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route path="/register" component={Register} />
               <Route path="/login" component={Login} />
+              <PrivateRoute path="/home" component={UserHome} />
               <PrivateRoute path="/users" component={UsersList} />
             </UserContext.Provider>
           </LoginContext.Provider>

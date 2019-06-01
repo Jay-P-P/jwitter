@@ -2,11 +2,14 @@ import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import config from '../config/RequestHeaders';
 import UserContext from './Users/UserContext';
+import '../css/App.css';
+import '../css/UserCard.css';
 
 const FollowButton = props => {
   let context = useContext(UserContext);
   const [isFollowed, setIsFollowed] = useState(false);
-  const { name, buttonStyle } = props;
+  const { name, buttonStyles } = props;
+  const { canFollow, isFollowing } = buttonStyles;
 
   useEffect(() => {
     const setButtonText = () => {
@@ -30,7 +33,10 @@ const FollowButton = props => {
   };
 
   return (
-    <button onClick={() => toggleFollow()} className={`Button ${buttonStyle}`}>
+    <button
+      onClick={() => toggleFollow()}
+      className={`Button ${isFollowed ? isFollowing : canFollow}`}
+    >
       {isFollowed ? 'Following' : 'Follow'}
     </button>
   );

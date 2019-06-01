@@ -1,0 +1,64 @@
+.UserCard-Heading {
+  background: black;
+  color: white;
+  max-width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.UserCard-StatBox {
+  width: 100%;
+  height: 60%;
+  padding: 2rem;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.UserCard-Stat {
+  color: #888;
+  float: right;
+}
+
+.UserCard-Button {
+  align-self: flex-end;
+  padding: 1rem;
+  margin: 0.5rem;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: white;
+  border-radius: 25px;
+  box-shadow: none;
+  border: 1px solid white;
+}
+
+.UserCard-ButtonFollow {
+  background: transparent;
+}
+
+.UserCard-ButtonFollow:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.UserCard-ButtonFollowing {
+  background: white;
+  color: black;
+}
+
+.UserCard-ButtonFollowing:hover {
+  background: red;
+  color: white;
+  border: 1px solid red;
+}
+
+.UserCard-StatHeading {
+  width: 100%;
+}
+
+.UserCard-Bio {
+  padding: 1rem 2rem;
+  color: white;
+  font-size: 1.2rem;
+}

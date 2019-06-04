@@ -7,7 +7,7 @@ import LoginContext from './Auth/LoginContext';
 const Home = props => {
   let context = useContext(LoginContext);
   return (
-    <div className="container">
+    <div className="container Home-Grid">
       {!context.isLoggedIn ? (
         <Fragment>
           <Link className="Button Home-RegisterBtn" to="/register">

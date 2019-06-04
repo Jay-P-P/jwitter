@@ -14,6 +14,7 @@
   padding: 0.5rem 1rem;
   font-size: 1.6rem;
   width: 50%;
+  color: white;
 }
 
 .Jweet-Date {
@@ -36,5 +37,20 @@
   display: flex;
   justify-content: space-evenly;
   width: 100%;
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+
+.Jweet-Button {
+  border: 0;
+  background: transparent;
   font-size: 1.6rem;
+}
+
+.Jweet-Button:focus {
+  outline: none;
+}
+
+.Jweet-Button:hover {
+  cursor: pointer;
 }

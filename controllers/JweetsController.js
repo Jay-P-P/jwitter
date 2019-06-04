@@ -1,12 +1,16 @@
 const Jweet = require('../models/Jweet');
 const User = require('../models/User');
+const Rejweet = require('../models/Rejweet');
 
 const JweetsController = {
   GetTimeline: async (req, res, next) => {
     const { id } = req.user;
 
-    let response = await User.findById(id, 'following');
-    let followingList = response.following;
+    let user = await User.findById(id, 'following');
+    if (!user) {
+      return res.status(404).json({ userNotFound: 'User does not exist.' });
+    }
+    let followingList = user.following;
     followingList.push(id);
     let jweets = await Jweet.find({ user: { $in: followingList } })
       .populate('user', 'name')
@@ -20,9 +24,12 @@ const JweetsController = {
     const { name } = req.params;
 
     let user = await User.findOne({ name });
+    if (!user) {
+      return res.status(404).json({ userNotFound: 'User does not exist.' });
+    }
     let jweets = await Jweet.find({ user: user.id }).populate('user', 'name');
 
-    res.status(200).json({ jweets });
+    return res.status(200).json({ jweets });
   },
   PostJweet: async (req, res, next) => {
     const { text } = req.body;
@@ -39,7 +46,6 @@ const JweetsController = {
   ToggleLikeJweet: async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user.id;
-
     let jweet = await Jweet.findById(id);
 
     let index = -1;
@@ -56,29 +62,37 @@ const JweetsController = {
     }
 
     await jweet.save();
-    res.status(200).json({ succes: true, jweet });
+    res.status(200).json({ likes: jweet.likes });
   },
   ToggleRejweetJweet: async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user.id;
 
-    let jweet = await Jweet.findById(id);
+    let jweet = await Jweet.findById(id).populate('rejweets');
 
     let index = -1;
-    jweet.rejweets.map((id, idx) => {
-      if (String(id) === String(userId)) {
+    jweet.rejweets.map((rejweet, idx) => {
+      if (String(rejweet.user) === String(userId)) {
+        console.log('Matches');
         index = idx;
       }
     });
 
     if (index === -1) {
-      jweet.rejweets.push(userId);
+      let newRejweet = new Rejweet({
+        user: userId,
+        jweet: id
+      });
+      await newRejweet.save();
+      jweet.rejweets.push(newRejweet);
     } else {
-      jweet.rejweets.splice(index);
+      let rejweetToDelete = jweet.rejweets[index];
+      await Rejweet.findByIdAndDelete(rejweetToDelete.id);
+      jweet.rejweets.splice(index, 1);
     }
 
     await jweet.save();
-    res.status(200).json({ succes: true, jweet });
+    res.status(200).json({ rejweets: jweet.rejweets });
   },
   DeleteJweet: async (req, res, next) => {
     const { id } = req.params;
@@ -94,6 +108,19 @@ const JweetsController = {
       });
     }
     res.status(200).json({ success: true });
+  },
+  GetJweet: async (req, res, next) => {
+    const { id } = req.params;
+
+    let jweet = await Jweet.findById(id).populate('user', 'name');
+
+    if (!jweet) {
+      return res
+        .status(404)
+        .json({ jweetNotFound: 'Jweet could not be found.' });
+    }
+
+    return res.status(200).json({ jweet });
   }
 };
 

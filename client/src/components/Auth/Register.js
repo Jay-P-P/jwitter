@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
 import InputBar from '../InputBar';
 import '../../css/App.css';
 import '../../css/Register.css';
 import config from '../../config/RequestHeaders';
 
-const Register = () => {
+const Register = props => {
+  const { history } = props;
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,9 +31,7 @@ const Register = () => {
       let response = await axios.post('/api/users/register', body, config);
       const { status } = response;
       if (status === 201) {
-        return (
-          <Route render={props => <Redirect to={{ pathname: '/login' }} />} />
-        );
+        history.push('/login');
       }
     } catch (err) {
       const { status, data } = err.response;

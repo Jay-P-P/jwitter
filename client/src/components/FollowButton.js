@@ -1,34 +1,48 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import config from '../config/RequestHeaders';
+import LoginContext from './Auth/LoginContext';
 import UserContext from './Users/UserContext';
 import '../css/App.css';
 import '../css/UserCard.css';
 
 const FollowButton = props => {
-  let context = useContext(UserContext);
+  let userContext = useContext(UserContext);
+  let loginContext = useContext(LoginContext);
   const [isFollowed, setIsFollowed] = useState(false);
+  const [clickedWithoutLogin, setClickedWithoutLogin] = useState(false);
   const { name, buttonStyles } = props;
   const { canFollow, isFollowing } = buttonStyles;
 
   useEffect(() => {
     const setButtonText = () => {
-      context.user.following
-        .filter(user => {
-          return user.name === name;
-        })
-        .map(() => {
-          return setIsFollowed(true);
-        });
+      if (userContext.user.following) {
+        userContext.user.following
+          .filter(user => {
+            return user.name === name;
+          })
+          .map(() => {
+            return setIsFollowed(true);
+          });
+      }
     };
     setButtonText();
-  }, [context, name]);
+  }, [userContext.user.following, name]);
 
   const toggleFollow = async () => {
-    let response = await axios.post(`/api/users/${name}/follow`, null, config);
-    if (response.status === 200) {
-      setIsFollowed(!isFollowed);
-      await context.updateUser(context.user.name);
+    if (loginContext.isLoggedIn) {
+      let response = await axios.post(
+        `/api/users/${name}/follow`,
+        null,
+        config
+      );
+      if (response.status === 200) {
+        setIsFollowed(!isFollowed);
+        await userContext.updateUser(userContext.user.name);
+      }
+    } else {
+      setClickedWithoutLogin(true);
     }
   };
 
@@ -37,6 +51,7 @@ const FollowButton = props => {
       onClick={() => toggleFollow()}
       className={`Button ${isFollowed ? isFollowing : canFollow}`}
     >
+      {clickedWithoutLogin ? <Redirect to="/login" /> : ''}
       {isFollowed ? 'Following' : 'Follow'}
     </button>
   );

@@ -8,6 +8,7 @@ import Home from '../Home';
 import JweetsList from '../Jweet/JweetsList';
 import '../../css/App.css';
 import '../../css/UserHome.css';
+import ComposeJweet from '../Jweet/ComposeJweet';
 
 const UserHome = props => {
   let userContext = useContext(UserContext);
@@ -19,18 +20,20 @@ const UserHome = props => {
       let response = await axios.get(`/api/jweets/`, config);
       if (response.status === 200) {
         setJweets(response.data.jweets);
-        console.log(response.data.jweets);
       }
     };
     getJweets();
-  }, []);
+  }, [userContext]);
 
   return (
     <div className="container UserHome-Grid">
       {loginContext.isLoggedIn ? (
         <Fragment>
           <UserCard paramName={userContext.user.name} />
-          <JweetsList jweets={jweets} />
+          <div>
+            <ComposeJweet />
+            <JweetsList jweets={jweets} />
+          </div>
         </Fragment>
       ) : (
         <Home />

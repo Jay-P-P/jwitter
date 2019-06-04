@@ -2,18 +2,33 @@ import React from 'react';
 import '../css/App.css';
 
 const InputBar = props => {
+  const {
+    inputType,
+    labelName,
+    className,
+    placeHolder,
+    name,
+    value,
+    children
+  } = props;
+
+  const handleOnKeyDown = event => {
+    event.stopPropagation();
+  };
+
   return (
     <label className="label">
-      {props.labelName}
+      {labelName}
       <input
-        type={props.inputType}
-        className={`input ${props.className}`}
-        placeholder={props.placeHolder}
-        name={props.name}
-        value={props.input}
+        type={inputType}
+        className={`input ${className}`}
+        placeholder={placeHolder}
+        name={name}
+        value={value}
         onChange={e => props.useInput(e)}
+        onKeyDown={e => handleOnKeyDown(e)}
       />
-      {props.children}
+      {children}
     </label>
   );
 };

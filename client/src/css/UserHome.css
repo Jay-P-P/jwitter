@@ -1,4 +1,5 @@
 .UserHome-Grid {
-  grid: auto-flow / 200px 1fr;
+  grid: auto-flow / 200px minmax(200px, 600px);
+  align-content: flex-start;
   align-items: flex-start;
 }

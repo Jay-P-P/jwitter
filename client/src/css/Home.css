@@ -1,24 +1,36 @@
+.Home-Grid {
+  align-items: center;
+}
+
 .Button:visited {
   color: white;
 }
 
-.Home-RegisterBtn {
+.Home-RegisterBtn, .Home-LoginBtn {
   border-radius: 20px;
+  box-shadow: 0px 5px 5px -3px black;
+  transition: transform 0.4s ease;
+}
+
+.Home-RegisterBtn {
   background-color: hsl(0, 50%, 50%);
 }
 
-.Home-RegisterBtn:hover {
-  width: 50%;
-  background-color: hsl(0, 50%, 40%);
-  box-shadow: 0px 10px 5px -5px black;
+.Home-LoginBtn {
+  background-color: hsl(240, 50%, 50%);
 }
 
-.Home-LoginBtn {
-  border-radius: 20px;
-  background-color: hsl(240, 50%, 50%);
+.Home-RegisterBtn:hover, .Home-LoginBtn:hover {
+  background-color: hsl(0, 50%, 40%);
+  box-shadow: 0px 10px 5px -5px black;
+  transform: scale(1.1);
+}
+
+
+.Home-RegisterBtn:hover {
+  background-color: hsl(0, 50%, 40%);
 }
 
 .Home-LoginBtn:hover {
   background-color: hsl(240, 50%, 40%);
-  box-shadow: 0px 10px 5px -5px black;
 }

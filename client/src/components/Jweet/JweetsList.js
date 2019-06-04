@@ -5,11 +5,13 @@ const JweetsList = props => {
   const { jweets } = props;
   return (
     <div>
-      {jweets
-        ? jweets.map(jweet => {
-            return <Jweet key={jweet._id} jweet={jweet} />;
-          })
-        : ''}
+      {jweets.length > 0 ? (
+        jweets.map(jweet => {
+          return <Jweet id={jweet._id} key={jweet._id} jweet={jweet} />;
+        })
+      ) : (
+        <div className="whiteBox Heading">This user has no jweets.</div>
+      )}
     </div>
   );
 };

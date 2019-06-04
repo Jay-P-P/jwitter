@@ -5,8 +5,6 @@ const JweetsController = require('../../controllers/JweetsController');
 
 const router = express.Router();
 
-router.get('/:name', JweetsController.GetJweets);
-
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
@@ -18,6 +16,8 @@ router.post(
   passport.authenticate('jwt', { session: false }),
   JweetsController.PostJweet
 );
+router.get('/user/:name', JweetsController.GetJweets);
+router.get('/:id', JweetsController.GetJweet);
 
 router.post(
   '/:id/like',

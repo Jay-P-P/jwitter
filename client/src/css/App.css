@@ -6,8 +6,18 @@
   align-content: center;
   align-items: center;
   width: 80%;
-  margin: 0 auto;
   height: 95vh;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:visited {
+  color: inherit;
 }
 
 .input {

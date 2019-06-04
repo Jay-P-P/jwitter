@@ -19,7 +19,7 @@ const Login = props => {
 
   let [validationErrors, setValidationErrors] = useState({});
 
-  const onSubmit = async event => {
+  const login = async event => {
     event.preventDefault();
     let user = {
       email,
@@ -53,7 +53,7 @@ const Login = props => {
 
   return (
     <div className="container">
-      <form onSubmit={e => onSubmit(e)} className="whiteBox">
+      <form onSubmit={e => login(e)} className="whiteBox">
         <h1 className="Heading">Login</h1>
         {validationErrors['login'] ? (
           <p className="Error">{validationErrors['login']}</p>

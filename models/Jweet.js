@@ -26,7 +26,7 @@ const JweetSchema = new Schema({
   rejweets: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'users'
+      ref: 'rejweets'
     }
   ]
 });

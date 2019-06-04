@@ -3,16 +3,16 @@
   box-shadow: 0px 3px 2px dimgray;
   width: 100%;
   height: 5vh;
-  overflow: hidden;
 }
 
 .NavBar-Link {
   text-decoration: none;
+  color: black;
 }
 
 .NavBar-li {
   padding: 1rem;
-  margin: auto 2rem;
+  margin: 0 1rem;
   height: 100%;
   font-size: 2rem;
 }
@@ -30,9 +30,9 @@
 .NavBar-ul {
   list-style: none;
   display: flex;
+  height: 100%;
   justify-content: flex-start;
   align-items: center;
-  resize: both;
 }
 
 .NavBar-Register {

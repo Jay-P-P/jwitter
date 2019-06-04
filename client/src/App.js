@@ -13,6 +13,7 @@ import LoginContext from './components/Auth/LoginContext';
 import config from './config/RequestHeaders';
 import UserContext from './components/Users/UserContext';
 import UserHome from './components/Users/UserHome';
+import UserProfile from './components/Users/UserProfile';
 
 function App() {
   const loginUser = () => {
@@ -36,17 +37,18 @@ function App() {
     <Router>
       <Fragment>
         <NavBar />
-        <Switch>
-          <LoginContext.Provider value={loginState}>
-            <UserContext.Provider value={userContext}>
+        <LoginContext.Provider value={loginState}>
+          <UserContext.Provider value={userContext}>
+            <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/register" component={Register} />
-              <Route path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
               <PrivateRoute path="/home" component={UserHome} />
               <PrivateRoute path="/users" component={UsersList} />
-            </UserContext.Provider>
-          </LoginContext.Provider>
-        </Switch>
+              <Route path="/:name" component={UserProfile} />
+            </Switch>
+          </UserContext.Provider>
+        </LoginContext.Provider>
       </Fragment>
     </Router>
   );

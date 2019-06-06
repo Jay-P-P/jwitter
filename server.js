@@ -23,9 +23,6 @@ app.use(
 app.use(cookieParser());
 app.use(passport.initialize());
 require('./config/passport')(passport);
-app.get('/', (req, res) => {
-  res.send('Hello Test!');
-});
 
 app.use('/api/users', UsersRouter);
 app.use('/api/jweets', JweetsRouter);

@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator/check');
 const errorFormatter = require('../validation/ErrorFormatter');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const config = require('config');
 const keys = require('../config/keys');
 
 module.exports = LoginController = async (req, res, next) => {
@@ -26,12 +27,13 @@ module.exports = LoginController = async (req, res, next) => {
 
   const { id, name } = user;
   const payload = { id, name };
+  const secretOrKey = config.get('secretOrKey');
   const signOptions = {
-    issuer: 'jwitter.com',
-    audience: 'jwitters',
+    issuer: config.get('jwtIssuer'),
+    audience: config.get('jwtAudience'),
     expiresIn: 3600
   };
-  await jwt.sign(payload, keys.secretOrKey, signOptions, (err, encoded) => {
+  await jwt.sign(payload, secretOrKey, signOptions, (err, encoded) => {
     if (err) {
       return res.status(500).json({
         errors: {

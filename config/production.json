@@ -1,0 +1,8 @@
+{
+  "mongoURI": "mongodb://jay:password1@ds155626.mlab.com:55626/jwitter",
+  "secretOrKey":
+    "This is a secret key to hide and protect. Interstellar is my favorite movie.",
+  "testMongoURI": "mongodb://localhost:27017/jwitter",
+  "jwtIssuer": "jwitter.com",
+  "jwtAudience": "jwitters"
+}

@@ -3,13 +3,14 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const config = require('config');
 
 const UsersRouter = require('./routes/api/users');
 const JweetsRouter = require('./routes/api/jweets');
 const keys = require('./config/keys');
 
 const app = express();
-const mongoURI = process.env.mongoURI || keys.mongoURI;
+const mongoURI = process.env.mongoURI || config.get('mongoURI');
 const db = mongoose
   .connect(mongoURI, { useNewUrlParser: true })
   .then(() => {})

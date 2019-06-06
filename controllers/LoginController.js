@@ -4,7 +4,6 @@ const errorFormatter = require('../validation/ErrorFormatter');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const keys = require('../config/keys');
 
 module.exports = LoginController = async (req, res, next) => {
   const errors = validationResult(req).formatWith(errorFormatter);

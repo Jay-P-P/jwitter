@@ -8,8 +8,9 @@ const JweetsRouter = require('./routes/api/jweets');
 const keys = require('./config/keys');
 
 const app = express();
+const mongoURI = process.env.mongoURI || keys.mongoURI;
 const db = mongoose
-  .connect(keys.mongoURI, { useNewUrlParser: true })
+  .connect(mongoURI, { useNewUrlParser: true })
   .then(() => {})
   .catch(err => {});
 

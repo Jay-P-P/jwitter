@@ -1,6 +1,8 @@
+const mongoose = require('mongoose');
 const Jweet = require('../models/Jweet');
 const User = require('../models/User');
 const Rejweet = require('../models/Rejweet');
+const Like = require('../models/Like');
 
 const JweetsController = {
   GetTimeline: async (req, res, next) => {
@@ -11,14 +13,56 @@ const JweetsController = {
       return res.status(404).json({ userNotFound: 'User does not exist.' });
     }
     let followingList = user.following;
-    followingList.push(id);
+
+    let likedJweets = await Like.find({ user: { $in: followingList } })
+      .populate('user', 'name')
+      .populate('jweet', 'user');
+
+    let rejweetedJweets = await Rejweet.find({ user: { $in: followingList } })
+      .populate('user', 'name')
+      .populate('jweet', 'user');
+
+    let response = [];
+    followingList.push(id); // Adding our own id so we can get our own jweets on the timeline.
+    likedJweets.map(jweet => {
+      if (String(jweet.jweet.user) !== String(id)) {
+        if (String(jweet.jweet.user) !== String(jweet.user.id))
+          response.push(jweet);
+      }
+    });
+
+    rejweetedJweets.map(jweet => {
+      if (String(jweet.jweet.user) !== String(id)) {
+        if (String(jweet.jweet.user) !== String(jweet.user.id))
+          response.push(jweet);
+      }
+    });
+
     let jweets = await Jweet.find({ user: { $in: followingList } })
       .populate('user', 'name')
-      .sort({
-        date: -1
+      .populate({
+        path: 'likes',
+        populate: {
+          path: 'user',
+          select: 'name'
+        }
+      })
+      .populate({
+        path: 'rejweets',
+        populate: {
+          path: 'user',
+          select: 'name'
+        }
       });
+    response.push(...jweets);
 
-    return res.status(200).json({ jweets });
+    response.sort((a, b) => {
+      let dateA = new Date(a.date);
+      let dateB = new Date(b.date);
+      return dateB - dateA;
+    });
+
+    return res.status(200).json({ jweets: response });
   },
   GetJweets: async (req, res, next) => {
     const { name } = req.params;
@@ -27,9 +71,52 @@ const JweetsController = {
     if (!user) {
       return res.status(404).json({ userNotFound: 'User does not exist.' });
     }
-    let jweets = await Jweet.find({ user: user.id }).populate('user', 'name');
+    let jweets = await Jweet.find({ user: user.id })
+      .populate('user', 'name')
+      .populate({
+        path: 'likes',
+        populate: {
+          path: 'user',
+          select: 'name'
+        }
+      })
+      .populate({
+        path: 'rejweets',
+        populate: {
+          path: 'user',
+          select: 'name'
+        }
+      });
 
-    return res.status(200).json({ jweets });
+    let response = [...jweets];
+
+    let likedJweets = await Like.find({ user: user.id })
+      .populate('user', 'name')
+      .populate('jweet', 'user');
+
+    let rejweetedJweets = await Rejweet.find({ user: user.id })
+      .populate('user', 'name')
+      .populate('jweet', 'user');
+
+    likedJweets.map(jweet => {
+      if (String(jweet.user.id) !== String(jweet.jweet.user)) {
+        response.push(jweet);
+      }
+    });
+
+    rejweetedJweets.map(jweet => {
+      if (String(jweet.user.id) !== String(jweet.jweet.user)) {
+        response.push(jweet);
+      }
+    });
+
+    response.sort((a, b) => {
+      let dateA = new Date(a.date);
+      let dateB = new Date(b.date);
+      return dateB - dateA;
+    });
+
+    return res.status(200).json({ jweets: response });
   },
   PostJweet: async (req, res, next) => {
     const { text } = req.body;
@@ -46,19 +133,32 @@ const JweetsController = {
   ToggleLikeJweet: async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user.id;
-    let jweet = await Jweet.findById(id);
+    let jweet = await Jweet.findById(id).populate({
+      path: 'likes',
+      populate: {
+        path: 'user',
+        select: 'name'
+      }
+    });
 
     let index = -1;
-    jweet.likes.map((id, idx) => {
-      if (String(id) === String(userId)) {
+    jweet.likes.map((like, idx) => {
+      if (String(like.user._id) === String(userId)) {
         index = idx;
       }
     });
 
     if (index === -1) {
-      jweet.likes.push(userId);
+      let newLike = new Like({
+        user: userId,
+        jweet: id
+      });
+      await newLike.save();
+      jweet.likes.push(newLike);
     } else {
-      jweet.likes.splice(index);
+      let likeToDelete = jweet.likes[index];
+      await Like.findByIdAndDelete(likeToDelete.id);
+      jweet.likes.splice(index, 1);
     }
 
     await jweet.save();
@@ -68,12 +168,17 @@ const JweetsController = {
     const { id } = req.params;
     const userId = req.user.id;
 
-    let jweet = await Jweet.findById(id).populate('rejweets');
+    let jweet = await Jweet.findById(id).populate({
+      path: 'rejweets',
+      populate: {
+        path: 'user',
+        select: 'name'
+      }
+    });
 
     let index = -1;
     jweet.rejweets.map((rejweet, idx) => {
-      if (String(rejweet.user) === String(userId)) {
-        console.log('Matches');
+      if (String(rejweet.user._id) === String(userId)) {
         index = idx;
       }
     });
@@ -110,9 +215,31 @@ const JweetsController = {
     res.status(200).json({ success: true });
   },
   GetJweet: async (req, res, next) => {
-    const { id } = req.params;
+    let id = '';
+    try {
+      id = mongoose.Types.ObjectId(req.params.id);
+    } catch (err) {
+      return res.status(400).json({ invalidId: 'The object id is invalid.' });
+    }
 
-    let jweet = await Jweet.findById(id).populate('user', 'name');
+    let jweet = await Jweet.findById(id)
+      .populate('user', 'name')
+      .populate({
+        path: 'likes',
+        populate: {
+          path: 'user',
+          select: 'name'
+        },
+        select: '-jweet'
+      })
+      .populate({
+        path: 'rejweets',
+        select: '-jweet',
+        populate: {
+          path: 'user',
+          select: 'name'
+        }
+      });
 
     if (!jweet) {
       return res

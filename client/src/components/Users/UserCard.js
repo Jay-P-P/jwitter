@@ -36,7 +36,7 @@ const UserCard = props => {
       }
     };
     fetchData();
-  }, [props.paramName, context]);
+  }, [props.paramName]);
 
   return accountExists ? (
     <div className="whiteBox UserCard-Box">

@@ -12,14 +12,16 @@ const LikeJweetButton = props => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    const { id } = userContext.user;
-    let result = likes.filter(user => {
-      return user.id === id;
-    });
-    if (result.length === 1) {
-      setIsLiked(true);
-    } else {
-      setIsLiked(false);
+    const { _id } = userContext.user;
+    if (likes.length > 0) {
+      let result = likes.filter(like => {
+        return like.user._id === _id;
+      });
+      if (result.length === 1) {
+        setIsLiked(true);
+      } else {
+        setIsLiked(false);
+      }
     }
   }, [userContext.user, likes]);
 
@@ -32,6 +34,7 @@ const LikeJweetButton = props => {
       );
       if (response.status === 200) {
         setIsLiked(!isLiked);
+        console.log(response.data);
         updateJweet(response.data);
       }
     } catch (err) {
@@ -54,7 +57,7 @@ const LikeJweetButton = props => {
           <i className="far fa-heart" />
         )}
       </button>{' '}
-      <span className="Jweet-Stat">{likes.length}</span>
+      <span className="Jweet-Stat">{likes ? likes.length : 0}</span>
     </Fragment>
   );
 };

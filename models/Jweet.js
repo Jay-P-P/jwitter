@@ -20,7 +20,7 @@ const JweetSchema = new Schema({
   likes: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'users'
+      ref: 'likes'
     }
   ],
   rejweets: [

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const RejweetSchema = new Schema({
+const LikeSchema = new Schema({
   jweet: {
     type: Schema.Types.ObjectId,
     ref: 'jweets',
     required: true
   },
-  isRejweet: {
+  isLike: {
     type: Boolean,
     default: true
   },
@@ -22,4 +22,4 @@ const RejweetSchema = new Schema({
   }
 });
 
-module.exports = Rejweet = mongoose.model('rejweets', RejweetSchema);
+module.exports = Like = mongoose.model('likes', LikeSchema);

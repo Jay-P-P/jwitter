@@ -12,14 +12,16 @@ const RejweetButton = props => {
   const [isRejweeted, setIsRejweeted] = useState(false);
 
   useEffect(() => {
-    const { id } = userContext.user;
-    let result = rejweets.filter(user => {
-      return user.id === id;
-    });
-    if (result.length === 1) {
-      setIsRejweeted(true);
-    } else {
-      setIsRejweeted(false);
+    const { _id } = userContext.user;
+    if (rejweets) {
+      let result = rejweets.filter(rejweet => {
+        return rejweet.user._id === _id;
+      });
+      if (result.length === 1) {
+        setIsRejweeted(true);
+      } else {
+        setIsRejweeted(false);
+      }
     }
   }, [userContext.user, rejweets]);
 
@@ -49,12 +51,12 @@ const RejweetButton = props => {
       {clickedWithoutLogin ? <Redirect to="/login" /> : null}
       <button onClick={() => rejweetJweet()} className="Jweet-Button">
         {isRejweeted ? (
-          <i className="fas fa-retweet" />
+          <i className="fas fa-retweet Jweet-Rejweeted" />
         ) : (
           <i className="fas fa-retweet" />
         )}
       </button>{' '}
-      <span className="Jweet-Stat">{rejweets.length}</span>
+      <span className="Jweet-Stat">{rejweets ? rejweets.length : 0}</span>
     </Fragment>
   );
 };

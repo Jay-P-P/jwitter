@@ -7,7 +7,6 @@ const config = require('config');
 
 const UsersRouter = require('./routes/api/users');
 const JweetsRouter = require('./routes/api/jweets');
-const keys = require('./config/keys');
 
 const app = express();
 const mongoURI = process.env.mongoURI || config.get('mongoURI');

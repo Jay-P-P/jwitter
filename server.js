@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const UsersRouter = require('./routes/api/users');
 const JweetsRouter = require('./routes/api/jweets');
@@ -28,6 +29,13 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', UsersRouter);
 app.use('/api/jweets', JweetsRouter);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 const port = process.env.port || 4000;
 const server = app.listen(port, function() {

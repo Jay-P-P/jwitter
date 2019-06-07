@@ -13,7 +13,7 @@ const LikeJweetButton = props => {
 
   useEffect(() => {
     const { _id } = userContext.user;
-    if (likes.length > 0) {
+    if (likes) {
       let result = likes.filter(like => {
         return like.user._id === _id;
       });

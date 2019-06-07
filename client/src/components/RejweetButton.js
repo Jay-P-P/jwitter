@@ -13,15 +13,13 @@ const RejweetButton = props => {
 
   useEffect(() => {
     const { _id } = userContext.user;
-    if (rejweets) {
-      let result = rejweets.filter(rejweet => {
-        return rejweet.user._id === _id;
-      });
-      if (result.length === 1) {
-        setIsRejweeted(true);
-      } else {
-        setIsRejweeted(false);
-      }
+    let result = rejweets.filter(rejweet => {
+      return rejweet.user === _id;
+    });
+    if (result.length === 1) {
+      setIsRejweeted(true);
+    } else {
+      setIsRejweeted(false);
     }
   }, [userContext.user, rejweets]);
 

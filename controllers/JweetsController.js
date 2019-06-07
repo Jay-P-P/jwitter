@@ -155,14 +155,24 @@ const JweetsController = {
       });
       await newLike.save();
       jweet.likes.push(newLike);
+      await jweet.save();
     } else {
       let likeToDelete = jweet.likes[index];
       await Like.findByIdAndDelete(likeToDelete.id);
       jweet.likes.splice(index, 1);
+      await jweet.save();
     }
 
-    await jweet.save();
-    res.status(200).json({ likes: jweet.likes });
+    let response = await Jweet.findById(id).populate({
+      path: 'likes',
+      populate: {
+        path: 'user',
+        select: 'name'
+      }
+    });
+    console.log(response);
+
+    return res.status(200).json({ likes: response.likes });
   },
   ToggleRejweetJweet: async (req, res, next) => {
     const { id } = req.params;
@@ -197,7 +207,15 @@ const JweetsController = {
     }
 
     await jweet.save();
-    res.status(200).json({ rejweets: jweet.rejweets });
+
+    let response = await Jweet.findById(id).populate({
+      path: 'rejweets',
+      populate: {
+        path: 'user',
+        select: 'name'
+      }
+    });
+    res.status(200).json({ rejweets: response.rejweets });
   },
   DeleteJweet: async (req, res, next) => {
     const { id } = req.params;
@@ -229,12 +247,10 @@ const JweetsController = {
         populate: {
           path: 'user',
           select: 'name'
-        },
-        select: '-jweet'
+        }
       })
       .populate({
         path: 'rejweets',
-        select: '-jweet',
         populate: {
           path: 'user',
           select: 'name'

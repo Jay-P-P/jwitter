@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config/RequestHeaders';
 import JweetTime from './JweetTime';
-import LikeJweetButton from '../LikeJweetButton';
-import RejweetButton from '../RejweetButton';
+import LikeJweetButton from './LikeJweetButton';
+import RejweetButton from './RejweetButton';
 
 const LikedJweet = props => {
   const { jweet: likedJweet } = props;

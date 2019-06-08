@@ -65,6 +65,10 @@ const JweetsController = {
     return res.status(200).json({ jweets: response });
   },
   GetJweets: async (req, res, next) => {
+    const errors = validationResult(req).formatWith(errorFormatter);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.mapped() });
+    }
     const { name } = req.params;
 
     let user = await User.findOne({ name });
@@ -119,6 +123,11 @@ const JweetsController = {
     return res.status(200).json({ jweets: response });
   },
   PostJweet: async (req, res, next) => {
+    const errors = validationResult(req).formatWith(errorFormatter);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.mapped() });
+    }
+
     const { text } = req.body;
     const { id } = req.user;
 
@@ -131,6 +140,11 @@ const JweetsController = {
     return res.status(201).json({ success: true, jweet });
   },
   ToggleLikeJweet: async (req, res, next) => {
+    const errors = validationResult(req).formatWith(errorFormatter);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.mapped() });
+    }
+
     const { id } = req.params;
     const userId = req.user.id;
     let jweet = await Jweet.findById(id).populate({
@@ -175,6 +189,11 @@ const JweetsController = {
     return res.status(200).json({ likes: response.likes });
   },
   ToggleRejweetJweet: async (req, res, next) => {
+    const errors = validationResult(req).formatWith(errorFormatter);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.mapped() });
+    }
+
     const { id } = req.params;
     const userId = req.user.id;
 
@@ -218,6 +237,11 @@ const JweetsController = {
     res.status(200).json({ rejweets: response.rejweets });
   },
   DeleteJweet: async (req, res, next) => {
+    const errors = validationResult(req).formatWith(errorFormatter);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.mapped() });
+    }
+
     const { id } = req.params;
     const { userId } = req.user;
 
@@ -233,6 +257,11 @@ const JweetsController = {
     res.status(200).json({ success: true });
   },
   GetJweet: async (req, res, next) => {
+    const errors = validationResult(req).formatWith(errorFormatter);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.mapped() });
+    }
+
     let id = '';
     try {
       id = mongoose.Types.ObjectId(req.params.id);

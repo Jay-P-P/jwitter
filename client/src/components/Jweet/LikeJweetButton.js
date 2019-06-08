@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import config from '../config/RequestHeaders';
-import UserContext from './Users/UserContext';
-import '../css/Jweet.css';
+import config from '../../config/RequestHeaders';
+import UserContext from '../Users/UserContext';
+import '../../css/Jweet.css';
 
 const LikeJweetButton = props => {
   let userContext = useContext(UserContext);

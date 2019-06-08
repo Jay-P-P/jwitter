@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../config/RequestHeaders';
 import JweetTime from './JweetTime';
-import LikeJweetButton from '../LikeJweetButton';
-import RejweetButton from '../RejweetButton';
+import LikeJweetButton from './LikeJweetButton';
+import RejweetButton from './RejweetButton';
 
 const RejweetedJweet = props => {
   const { jweet: rejweetedJweet } = props;
@@ -30,7 +30,7 @@ const RejweetedJweet = props => {
 
   return (
     <div className="whiteBox Jweet-List">
-      <p className="Jweet-Name Jweet-LikedName">
+      <p className="Jweet-Name Jweet-RejweetedName">
         <Link className="link" to={`/${rejweetedJweet.user.name}`}>
           <i className="fas fa-retweet" />{' '}
           {`${rejweetedJweet.user.name} rejweeted.`}

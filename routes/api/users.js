@@ -2,7 +2,11 @@ const express = require('express');
 const passport = require('passport');
 
 //Validators
-const { RegisterValidator, LoginValidator } = require('../../validation');
+const {
+  RegisterValidator,
+  LoginValidator,
+  UserValidator
+} = require('../../validation');
 
 //Controllers
 const RegisterController = require('../../controllers/RegisterController');
@@ -21,29 +25,33 @@ router.get(
   UsersController.GetAllUsers
 );
 
-router.get('/:name', UsersController.GetUser);
+router.get('/:name', UserValidator, UsersController.GetUser);
 
 router.get(
   '/:name/followers',
   passport.authenticate('jwt', { session: false }),
+  UserValidator,
   UsersController.GetFollowers
 );
 
 router.get(
   '/:name/following',
   passport.authenticate('jwt', { session: false }),
+  UserValidator,
   UsersController.GetFollowing
 );
 
 router.post(
   '/:name/follow',
   passport.authenticate('jwt', { session: false }),
+  UserValidator,
   UsersController.ToggleFollow
 );
 
 router.patch(
   '/:name',
   passport.authenticate('jwt', { session: false }),
+  UserValidator,
   UsersController.UpdateUser
 );
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import JweetTime from './JweetTime';
-import LikeJweetButton from '../LikeJweetButton';
+import LikeJweetButton from './LikeJweetButton';
 import '../../css/App.css';
 import '../../css/Jweet.css';
-import RejweetButton from '../RejweetButton';
+import RejweetButton from './RejweetButton';
 
 const Jweet = props => {
   const [jweet, setJweet] = useState({ ...props.jweet });

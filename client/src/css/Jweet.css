@@ -9,10 +9,6 @@
   justify-content: space-evenly;
 }
 
-.Jweet-LikedUser {
-  padding: 1rem;
-}
-
 .Jweet-Name {
   padding: 0.5rem 1rem;
   font-size: 1.6rem;
@@ -47,29 +43,17 @@
   border: 0;
   background: transparent;
   font-size: 1.6rem;
+  color: inherit;
 }
 
-.Jweet-Button:focus {
+.Jweet-Button:focus, .Jweet-Button:hover, .Jweet-Button:active {
   outline: none;
-}
-
-.Jweet-Button:hover {
   cursor: pointer;
 }
 
-.Jweet-LikedName {
+.Jweet-LikedName, .Jweet-RejweetedName {
   padding: 0.5rem 1rem;
   font-size: 1.6rem;
   width: 100%;
   font-style: italic;
-  color: #333;
-}
-
-.Jweet-Rejweeted {
-  font-weight: 800;
-}
-
-.Jweet-LikedJweet, .Jweet-RejweetedJweet {
-  padding: 0 1rem;
-  background: #ddd;
 }

@@ -3,6 +3,8 @@ import axios from 'axios';
 import UserContext from './UserContext';
 import config from '../../config/RequestHeaders';
 import UserCard from './UserCard';
+import '../../css/App.css';
+import '../../css/UserHome.css';
 
 const UsersList = props => {
   const [usersList, setUsersList] = useState([]);
@@ -18,7 +20,7 @@ const UsersList = props => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container UserHome-Grid">
       {users
         ? users
             .filter(user => user.name !== context.user.name)

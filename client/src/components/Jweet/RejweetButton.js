@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import config from '../config/RequestHeaders';
-import UserContext from './Users/UserContext';
-import '../css/Jweet.css';
+import config from '../../config/RequestHeaders';
+import UserContext from '../Users/UserContext';
+import '../../css/Jweet.css';
 
 const RejweetButton = props => {
   let userContext = useContext(UserContext);
@@ -14,7 +14,7 @@ const RejweetButton = props => {
   useEffect(() => {
     const { _id } = userContext.user;
     let result = rejweets.filter(rejweet => {
-      return rejweet.user === _id;
+      return rejweet.user._id === _id;
     });
     if (result.length === 1) {
       setIsRejweeted(true);
@@ -49,9 +49,9 @@ const RejweetButton = props => {
       {clickedWithoutLogin ? <Redirect to="/login" /> : null}
       <button onClick={() => rejweetJweet()} className="Jweet-Button">
         {isRejweeted ? (
-          <i className="fas fa-retweet Jweet-Rejweeted" />
+          <i className="fas fa-hourglass" />
         ) : (
-          <i className="fas fa-retweet" />
+          <i className="far fa-hourglass" />
         )}
       </button>{' '}
       <span className="Jweet-Stat">{rejweets ? rejweets.length : 0}</span>

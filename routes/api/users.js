@@ -25,33 +25,33 @@ router.get(
   UsersController.GetAllUsers
 );
 
-router.get('/:name', UserValidator, UsersController.GetUser);
+router.get('/:name', UserValidator.nameValidator, UsersController.GetUser);
 
 router.get(
   '/:name/followers',
   passport.authenticate('jwt', { session: false }),
-  UserValidator,
+  UserValidator.nameValidator,
   UsersController.GetFollowers
 );
 
 router.get(
   '/:name/following',
   passport.authenticate('jwt', { session: false }),
-  UserValidator,
+  UserValidator.nameValidator,
   UsersController.GetFollowing
 );
 
 router.post(
   '/:name/follow',
   passport.authenticate('jwt', { session: false }),
-  UserValidator,
+  UserValidator.nameValidator,
   UsersController.ToggleFollow
 );
 
 router.patch(
   '/:name',
   passport.authenticate('jwt', { session: false }),
-  UserValidator,
+  UserValidator.updateUserValidator,
   UsersController.UpdateUser
 );
 

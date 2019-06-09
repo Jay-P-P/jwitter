@@ -15,30 +15,35 @@ router.get(
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  JweetValidator,
+  JweetValidator.postJweetValidator,
   JweetsController.PostJweet
 );
-router.get('/user/:name', UserValidator, JweetsController.GetJweets);
-router.get('/:id', JweetValidator, JweetsController.GetJweet);
+router.get(
+  '/user/:name',
+  UserValidator.nameValidator,
+  JweetsController.GetJweets
+);
+
+router.get('/:id', JweetValidator.idValidator, JweetsController.GetJweet);
 
 router.post(
   '/:id/like',
   passport.authenticate('jwt', { session: false }),
-  JweetValidator,
+  JweetValidator.idValidator,
   JweetsController.ToggleLikeJweet
 );
 
 router.post(
   '/:id/rejweet',
   passport.authenticate('jwt', { session: false }),
-  JweetValidator,
+  JweetValidator.idValidator,
   JweetsController.ToggleRejweetJweet
 );
 
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  JweetValidator,
+  JweetValidator.idValidator,
   JweetsController.DeleteJweet
 );
 

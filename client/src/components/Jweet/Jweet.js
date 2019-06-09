@@ -9,39 +9,44 @@ import RejweetButton from './RejweetButton';
 const Jweet = props => {
   const [jweet, setJweet] = useState({ ...props.jweet });
   const { user, text, date, likes, rejweets, _id } = jweet;
-  const { name } = user;
 
   const updateJweet = async data => {
     setJweet({ ...jweet, ...data });
   };
 
   return (
-    <div className="whiteBox Jweet-List">
+    <div className="whiteBox">
       <div className="Jweet-User">
         <p className="Jweet-Name">
-          <Link className="link" to={`/${name}`}>
-            {name}
-          </Link>
+          {user ? (
+            <Link className="link" to={`/${user.name}`}>
+              {`${user.name}`}
+            </Link>
+          ) : null}
         </p>
-        <JweetTime date={date} />
+        {date ? <JweetTime date={date} /> : ''}
       </div>
       <div className="Jweet-TextBox">
         <p className="Jweet-Text">{text}</p>
       </div>
       <div className="Jweet-StatBox">
         <h3 className="Jweet-StatHeading">
-          <LikeJweetButton
-            likes={likes}
-            updateJweet={updateJweet}
-            jweetId={_id}
-          />
+          {likes ? (
+            <LikeJweetButton
+              likes={likes}
+              updateJweet={updateJweet}
+              jweetId={_id}
+            />
+          ) : null}
         </h3>
         <h3 className="Jweet-StatHeading">
-          <RejweetButton
-            rejweets={rejweets}
-            updateJweet={updateJweet}
-            jweetId={_id}
-          />
+          {rejweets ? (
+            <RejweetButton
+              rejweets={rejweets}
+              updateJweet={updateJweet}
+              jweetId={_id}
+            />
+          ) : null}
         </h3>
       </div>
     </div>

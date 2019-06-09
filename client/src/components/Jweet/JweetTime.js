@@ -14,9 +14,13 @@ const JweetTime = props => {
   }, [date]);
 
   return (
-    <p className="Jweet-Date">{`${prettyTime(jweetTime, {
-      unitCount: 1
-    })} ago`}</p>
+    <p className="Jweet-Date">
+      {date
+        ? `${prettyTime(jweetTime, {
+            unitCount: 1
+          })} ago`
+        : null}
+    </p>
   );
 };
 

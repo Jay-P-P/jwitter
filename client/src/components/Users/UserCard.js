@@ -42,10 +42,10 @@ const UserCard = props => {
     <div className="whiteBox UserCard-Box">
       <div className="UserCard-Heading">
         <Link className="link" to={`/${name}`}>
-          <h1 className="Heading">{name}</h1>
+          <h1 className="Heading">{name ? name : null}</h1>
         </Link>
 
-        {bio ? <p className="UserCard-Bio">{bio}</p> : null}
+        {bio ? <p className="UserCard-Bio">{bio ? bio : null}</p> : null}
 
         {context.user.name === name ? (
           ''

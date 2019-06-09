@@ -3,6 +3,7 @@ const Jweet = require('../models/Jweet');
 const User = require('../models/User');
 const Rejweet = require('../models/Rejweet');
 const Like = require('../models/Like');
+const { validationResult } = require('express-validator/check');
 
 const JweetsController = {
   GetTimeline: async (req, res, next) => {
@@ -184,7 +185,6 @@ const JweetsController = {
         select: 'name'
       }
     });
-    console.log(response);
 
     return res.status(200).json({ likes: response.likes });
   },

@@ -1,4 +1,9 @@
 .UserHome-Grid {
   align-content: flex-start;
   align-items: flex-start;
+  height: auto;
+}
+
+.UserHome-Timeline {
+  max-width: 800px;
 }

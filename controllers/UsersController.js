@@ -24,7 +24,7 @@ const UsersController = {
 
     let user = await User.findOne(
       { name },
-      'name followers following bio'
+      'name followers following bio email'
     ).populate('followers following', 'name');
 
     if (!user) {
@@ -136,6 +136,7 @@ const UsersController = {
   UpdateUser: async (req, res, next) => {
     const { id } = req.user;
     const { name: paramName } = req.params;
+    console.log(req.body);
     const { name, email, bio, password } = req.body;
     let user = await User.findOne({ name: paramName });
     if (user.id != id) {
@@ -145,13 +146,13 @@ const UsersController = {
     }
 
     if (name) {
-      user.name = name;
+      if (name !== user.name) user.name = name;
     }
     if (email) {
-      user.email = email;
+      if (email !== user.email) user.email = email;
     }
     if (bio) {
-      user.bio = bio;
+      if (bio !== user.bio) user.bio = bio;
     }
     if (password) {
       bcrypt.genSalt(13, (err, salt) => {

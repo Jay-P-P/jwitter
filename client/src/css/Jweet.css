@@ -3,6 +3,10 @@
   border-top: 1px solid black;
 }
 
+.Jweet-Container {
+  max-width: 800px;
+}
+
 .Jweet-User {
   display: flex;
   width: 100%;

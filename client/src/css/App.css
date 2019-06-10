@@ -15,7 +15,7 @@
 @media only screen and (max-width: 480px) {
   .container {
     grid: auto-flow / 1fr;
-    justify-items: stretch;
+    justify-items: center;
   }
 }
 
@@ -28,7 +28,7 @@
   color: inherit;
 }
 
-.input {
+.input, .textarea {
   font-size: 1.6rem;
   color: slateblue;
   height: 4rem;
@@ -70,6 +70,7 @@
 .Button:focus, .Button:active, .Button:hover {
   outline: none;
   cursor: pointer;
+  box-shadow: 0px 10px 5px -5px black;
 }
 
 .Error {

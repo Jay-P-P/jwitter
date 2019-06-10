@@ -18,15 +18,17 @@ const ComposeJweet = props => {
   const postJweet = async event => {
     event.preventDefault();
     event.stopPropagation();
-    let jweet = {
-      text
-    };
-    const body = JSON.stringify(jweet);
-    let response = await axios.post('/api/jweets/', body, config);
-    if (response.status === 201) {
-      await userContext.updateUser(userContext.user.name);
-      setFormData({ ...formData, text: '' });
-      history.push('/home');
+    if (text.length > 0) {
+      let jweet = {
+        text
+      };
+      const body = JSON.stringify(jweet);
+      let response = await axios.post('/api/jweets/', body, config);
+      if (response.status === 201) {
+        await userContext.updateUser(userContext.user.name);
+        setFormData({ ...formData, text: '' });
+        history.push('/home');
+      }
     }
   };
 

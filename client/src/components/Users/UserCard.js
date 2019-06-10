@@ -5,6 +5,7 @@ import config from '../../config/RequestHeaders';
 import UserContext from './UserContext';
 import FollowButton from '../FollowButton';
 import '../../css/UserCard.css';
+import '../../css/Jweet.css';
 import '../../css/App.css';
 
 const UserCard = props => {
@@ -48,7 +49,9 @@ const UserCard = props => {
         {bio ? <p className="UserCard-Bio">{bio ? bio : null}</p> : null}
 
         {context.user.name === name ? (
-          ''
+          <Link className="link UserCard-Button" to="/user/profile">
+            Edit Profile
+          </Link>
         ) : (
           <FollowButton buttonStyles={buttonStyles} name={name} />
         )}

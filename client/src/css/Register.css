@@ -2,11 +2,6 @@
   width: 100%;
 }
 
-.RegisterInputBar:focus {
-  box-shadow: 0 0 5px rgba(200, 100, 0, 0.8);
-  border: 2px solid rgba(200, 100, 0, 0.8);
-}
-
 .Register-RegisterBtn {
   margin-left: auto;
   margin-right: auto;
@@ -19,5 +14,4 @@
 
 .Register-RegisterBtn:hover {
   background-color: hsl(0, 50%, 40%);
-  box-shadow: 0px 10px 5px -5px black;
 }

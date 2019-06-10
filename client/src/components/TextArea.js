@@ -1,31 +1,33 @@
 import React from 'react';
 import '../css/App.css';
 
-const InputBar = props => {
+const TextArea = props => {
   const {
-    inputType,
+    cols,
+    rows,
     labelName,
+    maxlength,
     className,
     placeHolder,
     name,
-    value,
-    children
+    value
   } = props;
 
   return (
     <label className="label">
       {labelName}
-      <input
-        type={inputType}
-        className={`input ${className}`}
+      <textarea
+        cols={cols}
+        rows={rows}
+        maxLength={maxlength}
+        className={`textarea ${className}`}
         placeholder={placeHolder}
         name={name}
         value={value}
         onChange={e => props.useInput(e)}
       />
-      {children}
     </label>
   );
 };
 
-export default InputBar;
+export default TextArea;

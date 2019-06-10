@@ -30,7 +30,7 @@ const UserHome = props => {
       {loginContext.isLoggedIn ? (
         <Fragment>
           <UserCard paramName={userContext.user.name} />
-          <div>
+          <div className="UserHome-Timeline">
             <ComposeJweet />
             <JweetsList jweets={jweets} />
           </div>

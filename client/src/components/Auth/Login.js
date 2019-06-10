@@ -33,7 +33,7 @@ const Login = props => {
       if (status === 200) {
         loginContext.loginUser();
         await userContext.updateUser(response.data.name);
-        history.push('/');
+        history.push('/home');
       }
     } catch (err) {
       if (typeof err === 'object') {

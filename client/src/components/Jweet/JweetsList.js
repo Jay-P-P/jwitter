@@ -3,13 +3,14 @@ import Jweet from './Jweet';
 import LikedJweet from './LikedJweet';
 import UserContext from '../Users/UserContext';
 import RejweetedJweet from './RejweetedJweet';
+import '../../css/Jweet.css';
 
 const JweetsList = props => {
   const userContext = useContext(UserContext);
   const { jweets } = props;
 
   return (
-    <div>
+    <div className="Jweet-Container">
       {jweets.length > 0 ? (
         jweets.map(jweet => {
           if (jweet.isLike) {

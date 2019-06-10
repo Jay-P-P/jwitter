@@ -14,6 +14,7 @@ import config from './config/RequestHeaders';
 import UserContext from './components/Users/UserContext';
 import UserHome from './components/Users/UserHome';
 import UserProfile from './components/Users/UserProfile';
+import UserEditProfile from './components/Users/UserEditProfile';
 
 function App() {
   const loginUser = () => {
@@ -44,6 +45,7 @@ function App() {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <PrivateRoute path="/home" component={UserHome} />
+              <PrivateRoute path="/user/profile" component={UserEditProfile} />
               <PrivateRoute path="/users" component={UsersList} />
               <Route path="/:name" component={UserProfile} />
             </Switch>

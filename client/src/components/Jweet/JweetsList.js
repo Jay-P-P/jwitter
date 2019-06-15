@@ -10,13 +10,13 @@ const JweetsList = props => {
   const { jweets } = props;
 
   return (
-    <div className="Jweet-Container">
+    <div className="whiteBox">
       {jweets.length > 0 ? (
         jweets.map(jweet => {
           if (jweet.isLike) {
             if (userContext.user.name !== jweet.user.name) {
               return (
-                <section key={jweet._id} className="Jweet-List">
+                <section key={jweet._id} className="Jweet">
                   <LikedJweet key={jweet._id} jweet={jweet} />
                 </section>
               );
@@ -26,7 +26,7 @@ const JweetsList = props => {
           } else if (jweet.isRejweet) {
             if (userContext.user.name !== jweet.user.name) {
               return (
-                <section key={jweet._id} className="Jweet-List">
+                <section key={jweet._id} className="Jweet">
                   <RejweetedJweet key={jweet._id} jweet={jweet} />
                 </section>
               );
@@ -35,7 +35,7 @@ const JweetsList = props => {
             }
           }
           return (
-            <section key={jweet._id} className="Jweet-List">
+            <section key={jweet._id} className="Jweet">
               <Jweet key={jweet._id} jweet={jweet} />
             </section>
           );

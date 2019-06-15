@@ -22,7 +22,7 @@ const LikedJweet = props => {
   }, [likedJweet]);
 
   return (
-    <div className="whiteBox">
+    <div>
       <p className="Jweet-Name Jweet-LikedName">
         {likedJweet ? (
           <Link className="link" to={`/${likedJweet.user.name}`}>

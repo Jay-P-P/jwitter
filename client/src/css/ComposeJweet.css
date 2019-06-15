@@ -1,5 +1,6 @@
 .ComposeJweet-InputBar {
   width: 100%;
+  background-color: hsl(0, 0%, 100%);
 }
 
 .ComposeJweet-Form {

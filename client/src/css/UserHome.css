@@ -6,4 +6,5 @@
 
 .UserHome-Timeline {
   max-width: 800px;
+  justify-self: stretch;
 }

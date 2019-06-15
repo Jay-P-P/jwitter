@@ -1,10 +1,10 @@
-.Jweet-List {
+.Jweet {
   margin: 0;
   border-top: 1px solid black;
 }
 
-.Jweet-Container {
-  max-width: 800px;
+.Jweet-Box {
+  box-shadow: none;
 }
 
 .Jweet-User {
@@ -56,8 +56,6 @@
 }
 
 .Jweet-LikedName, .Jweet-RejweetedName {
-  padding: 0.5rem 1rem;
-  font-size: 1.6rem;
-  width: 100%;
   font-style: italic;
+  width: 100%;
 }

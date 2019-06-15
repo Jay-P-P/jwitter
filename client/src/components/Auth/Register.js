@@ -45,8 +45,8 @@ const Register = props => {
   const { name, email, password, passwordConfirmation } = formData;
 
   return (
-    <div className="container">
-      <form className="whiteBox" onSubmit={e => onSubmit(e)}>
+    <div className="container Register-Container">
+      <form className="whiteBox Register-Form" onSubmit={e => onSubmit(e)}>
         <h1 className="Heading">Register</h1>
         <InputBar
           inputType="text"

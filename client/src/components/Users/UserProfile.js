@@ -28,7 +28,9 @@ const UserProfile = props => {
   ) : (
     <div className="container UserHome-Grid">
       <UserCard paramName={name} />
-      <JweetsList jweets={jweets} />
+      <div className="UserHome-Timeline">
+        <JweetsList jweets={jweets} />
+      </div>
     </div>
   );
 };

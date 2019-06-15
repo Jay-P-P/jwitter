@@ -34,7 +34,9 @@ module.exports = [
     .exists()
     .withMessage('Password is required.')
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
-    .withMessage('Password does not meet strong password requirements.'),
+    .withMessage(
+      'Password does not meet strong password requirements. Password must contain (1) uppercase, (1) lowercase, (1) numeric, and (1) symbolic character. Passwords must be at least 8 characters long.'
+    ),
   body('passwordConfirmation')
     .exists()
     .withMessage('Password confirmation is required.')

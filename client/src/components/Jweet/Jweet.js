@@ -15,7 +15,7 @@ const Jweet = props => {
   };
 
   return (
-    <div className="whiteBox">
+    <div className="whiteBox Jweet-Box">
       <div className="Jweet-User">
         <p className="Jweet-Name">
           {user ? (

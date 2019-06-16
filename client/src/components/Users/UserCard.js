@@ -12,7 +12,8 @@ const UserCard = props => {
   let context = useContext(UserContext);
   const [userState, setUserState] = useState({});
   const [accountExists, setAccountExists] = useState(true);
-  const { followers, following, name, jweets, bio } = userState;
+  const [jweetsCount, setJweetsCount] = useState(0);
+  const { followers, following, name, bio } = userState;
 
   const buttonStyles = {
     canFollow: 'UserCard-Button UserCard-ButtonFollow',
@@ -28,8 +29,13 @@ const UserCard = props => {
           config
         );
         if (response.status === 200) {
-          setUserState({ ...response.data, ...jweets.data });
+          setUserState({ ...response.data });
         }
+        let timelineOfJweets = jweets.data.jweets;
+        let numOfJweetsByUser = timelineOfJweets.filter(jweet => {
+          return jweet.text;
+        });
+        setJweetsCount(numOfJweetsByUser.length);
       } catch (err) {
         if (err.response.status === 404) {
           setAccountExists(false);
@@ -74,7 +80,7 @@ const UserCard = props => {
 
         <h3 className="UserCard-StatHeading">
           Jweets
-          <span className="UserCard-Stat">{jweets ? jweets.length : 0}</span>
+          <span className="UserCard-Stat">{jweetsCount ? jweetsCount : 0}</span>
         </h3>
       </div>
     </div>

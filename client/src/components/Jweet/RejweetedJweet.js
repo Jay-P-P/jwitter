@@ -22,7 +22,7 @@ const RejweetedJweet = props => {
   }, [rejweetedJweet]);
 
   return (
-    <div className="whiteBox">
+    <div>
       <p className="Jweet-Name Jweet-RejweetedName">
         <Link className="link" to={`/${rejweetedJweet.user.name}`}>
           <i className="fas fa-retweet" />{' '}

@@ -1,9 +1,10 @@
 .UserCard-Box {
   max-width: 300px;
+  border-radius: 4.20%;
 }
 
 .UserCard-Heading {
-  background: black;
+  background-color: black;
   color: white;
   width: 100%;
   height: 40%;

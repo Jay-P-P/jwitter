@@ -10,7 +10,7 @@ const JweetsList = props => {
   const { jweets } = props;
 
   return (
-    <div className="whiteBox">
+    <div className="whiteBox Jweet-List">
       {jweets.length > 0 ? (
         jweets.map(jweet => {
           if (jweet.isLike) {

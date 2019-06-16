@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import InputBar from '../InputBar';
 import config from '../../config/RequestHeaders';
+import '../../css/App.css';
 import '../../css/ComposeJweet.css';
 import UserContext from '../Users/UserContext';
 

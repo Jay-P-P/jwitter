@@ -11,3 +11,8 @@
 .Login-LoginBtn:hover {
   background-color: hsl(240, 50%, 40%);
 }
+
+.Login-LoginBtn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}

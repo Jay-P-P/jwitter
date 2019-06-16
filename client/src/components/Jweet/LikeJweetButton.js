@@ -52,7 +52,7 @@ const LikeJweetButton = props => {
       {clickedWithoutLogin ? <Redirect to="/login" /> : null}
       <button onClick={() => likeJweet()} className="Jweet-Button">
         {isLiked ? (
-          <i className="fas fa-heart" />
+          <i className="fas fa-heart Jweet-Liked" />
         ) : (
           <i className="far fa-heart" />
         )}

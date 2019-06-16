@@ -1,10 +1,16 @@
 .Jweet {
   margin: 0;
-  border-top: 1px solid black;
+  border-top: 2px dotted #cad;
+  border-radius: 0;
 }
 
 .Jweet-Box {
   box-shadow: none;
+  border-radius: 0;
+}
+
+.Jweet-List {
+  border-radius: 0;
 }
 
 .Jweet-User {
@@ -23,7 +29,7 @@
   width: 50%;
   padding: 1rem;
   text-align: right;
-  color: #aaa;
+  color: #dac;
 }
 
 .Jweet-TextBox {
@@ -50,12 +56,25 @@
   color: inherit;
 }
 
-.Jweet-Button:focus, .Jweet-Button:hover, .Jweet-Button:active {
+.Jweet-Button:focus,
+.Jweet-Button:hover,
+.Jweet-Button:active {
   outline: none;
   cursor: pointer;
+  color: #dac;
 }
 
-.Jweet-LikedName, .Jweet-RejweetedName {
+.Jweet-Liked, .Jweet-Rejweeted {
+  color: #dac;
+}
+
+.Jweet-Liked:hover, .Jweet-Rejweeted:hover {
+  color: #f00;
+}
+
+.Jweet-LikedName,
+.Jweet-RejweetedName {
   font-style: italic;
   width: 100%;
+  color: black;
 }

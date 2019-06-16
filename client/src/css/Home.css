@@ -9,7 +9,6 @@
 .Home-RegisterBtn, .Home-LoginBtn {
   border-radius: 20px;
   box-shadow: 0px 5px 5px -3px black;
-  transition: transform 0.4s ease;
 }
 
 .Home-RegisterBtn {
@@ -21,11 +20,13 @@
 }
 
 .Home-RegisterBtn:hover, .Home-LoginBtn:hover {
-  background-color: hsl(0, 50%, 40%);
   box-shadow: 0px 10px 5px -5px black;
-  transform: scale(1.1);
 }
 
+.Home-RegisterBtn:active, .Home-LoginBtn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
 
 .Home-RegisterBtn:hover {
   background-color: hsl(0, 50%, 40%);

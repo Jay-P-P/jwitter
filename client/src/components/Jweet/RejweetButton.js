@@ -51,7 +51,7 @@ const RejweetButton = props => {
       {clickedWithoutLogin ? <Redirect to="/login" /> : null}
       <button onClick={() => rejweetJweet()} className="Jweet-Button">
         {isRejweeted ? (
-          <i className="fas fa-hourglass" />
+          <i className="fas fa-hourglass Jweet-Rejweeted" />
         ) : (
           <i className="far fa-hourglass" />
         )}

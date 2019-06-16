@@ -1,6 +1,5 @@
 .UserCard-Box {
   max-width: 300px;
-  border-radius: 4.20%;
 }
 
 .UserCard-Heading {
@@ -8,6 +7,7 @@
   color: white;
   width: 100%;
   height: 40%;
+  border-radius: 15px 15px 0 0;
   display: flex;
   flex-direction: column;
 }
@@ -48,6 +48,10 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
+.UserCard-ButtonFollow:active {
+  background: rgba(255, 255, 255, 0.8);
+}
+
 .UserCard-ButtonFollowing {
   background: white;
   color: black;
@@ -66,6 +70,11 @@
 .UserCard-Bio {
   padding: 1rem 2rem;
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0 auto;
+}
+
+.UserCard-Edit:hover {
+  background-color: white;
+  color: black;
 }

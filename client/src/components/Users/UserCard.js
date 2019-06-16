@@ -55,7 +55,10 @@ const UserCard = props => {
         {bio ? <p className="UserCard-Bio">{bio ? bio : null}</p> : null}
 
         {context.user.name === name ? (
-          <Link className="link UserCard-Button" to="/user/profile">
+          <Link
+            className="link UserCard-Button UserCard-Edit"
+            to="/user/profile"
+          >
             Edit Profile
           </Link>
         ) : (

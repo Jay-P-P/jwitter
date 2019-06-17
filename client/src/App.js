@@ -46,7 +46,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <PrivateRoute path="/home" component={UserHome} />
               <PrivateRoute path="/user/profile" component={UserEditProfile} />
-              <PrivateRoute path="/users" component={UsersList} />
+              <Route path="/users" component={UsersList} />
               <Route path="/:name" component={UserProfile} />
             </Switch>
           </UserContext.Provider>

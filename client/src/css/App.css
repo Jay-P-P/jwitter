@@ -6,7 +6,7 @@
   align-content: center;
   align-items: center;
   width: 95%;
-  padding-top: 6vh;
+  padding: 6vh 1rem;
   margin: 0 auto;
   min-height: 100vh;
 }

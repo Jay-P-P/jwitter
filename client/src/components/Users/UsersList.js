@@ -20,7 +20,7 @@ const UsersList = props => {
   }, []);
 
   return (
-    <div className="container UserHome-Grid">
+    <div className="container">
       {users
         ? users
             .filter(user => user.name !== context.user.name)

@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid: auto-flow / repeat(auto-fit, minmax(200px, max-content));
+  grid: auto-flow dense / repeat(auto-fit, 300px);
   grid-gap: 10px;
   justify-content: center;
   align-content: center;
@@ -10,7 +10,7 @@
   top: 5vh;
   padding: 1rem;
   margin: 0 auto;
-  height: 95vh;
+  height: auto;
 }
 
 @media only screen and (max-width: 480px) {

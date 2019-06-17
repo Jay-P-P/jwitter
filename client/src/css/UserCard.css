@@ -1,5 +1,6 @@
 .UserCard-Box {
   max-width: 300px;
+  min-width: 200px;
 }
 
 .UserCard-Heading {
@@ -71,6 +72,8 @@
   padding: 1rem 2rem;
   color: white;
   font-size: 1.4rem;
+  max-width: 100%;
+  word-wrap: break-word;
   margin: 0 auto;
 }
 

@@ -4,7 +4,7 @@ import UserContext from './UserContext';
 import config from '../../config/RequestHeaders';
 import UserCard from './UserCard';
 import '../../css/App.css';
-import '../../css/UserHome.css';
+import '../../css/UsersList.css';
 
 const UsersList = props => {
   const [usersList, setUsersList] = useState([]);

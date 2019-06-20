@@ -32,11 +32,19 @@
   display: none;
 }
 
-.NoJweets-exit {
+.NoJweets-enter {
   background: red;
 }
 
-.NoJweets-exit-active {
+.NoJweets-enter-active {
   background: blue;
   transition: background 500ms ease;
+}
+
+.NoJweets-exit {
+  display: none;
+}
+
+.NoJweets-exit-active {
+  display: none;
 }

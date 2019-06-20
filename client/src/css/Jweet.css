@@ -88,5 +88,6 @@
 }
 
 .Jweet-List .Jweet + .Jweet {
-  border-top: 2px dotted #cad;
+  background: rgb(255, 255, 255);
+  border-top: 2px dotted #dac;
 }

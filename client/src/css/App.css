@@ -55,38 +55,12 @@
   padding: 1rem 0;
 }
 
-.Loading {
-  animation-name: Loading;
-  animation-duration: 1s;
-  background-image: linear-gradient(#000 50%, #dac 50%);
-  animation-iteration-count: infinite;
-  border-radius: 50%;
-  margin: 2rem auto;
-  width: 5rem;
-  height: 5rem;
-  justify-self: center;
+.Loading-exit {
+  display: none;
 }
 
-.Loading:after {
-  content: "";
-  position: absolute;
-  transform: scale(0.8);
-  left: 10%;
-  top: 10%;
-  border-radius: 50%;
-  width: 4rem;
-  height: 4rem;
-  background: #dac;
-}
-
-@keyframes Loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(720deg);
-  }
+.Loading-exit-active {
+  display: none;
 }
 
 .Button {

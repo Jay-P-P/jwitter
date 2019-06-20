@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator/check');
 const UsersController = {
   GetAllUsers: async (req, res, next) => {
     let users = await User.find()
-      .select('-password -email')
+      .select('name')
       .sort('-1');
     if (!users) {
       return res

@@ -13,18 +13,26 @@ import ComposeJweet from '../Jweet/ComposeJweet';
 const UserHome = props => {
   let userContext = useContext(UserContext);
   let loginContext = useContext(LoginContext);
-  const [jweets, setJweets] = useState(null);
+  const [jweets, setJweets] = useState([]);
+  const [jweetsLoaded, setJweetsLoaded] = useState(false);
 
   useEffect(() => {
     const getJweets = async () => {
-      let response = await axios.get(`/api/jweets/`);
-      if (response.status === 200) {
-        setJweets(response.data.jweets);
+      try {
+        let response = await axios.get(`/api/jweets/`);
+        if (response.status === 200) {
+          setJweets(response.data.jweets);
+          setJweetsLoaded(true);
+        }
+      } catch (err) {
+        if (err.response.status === 404) {
+          setJweetsLoaded(true);
+        }
       }
     };
     getJweets();
     return () => {};
-  }, [userContext, jweets]);
+  }, [userContext]);
 
   const updateJweets = () => {
     console.log('Updating jweets');
@@ -39,7 +47,7 @@ const UserHome = props => {
           <div className="UserHome-Timeline">
             <ComposeJweet onPostJweet={updateJweets} />
             <CSSTransition timeout={1000} classNames="UserHomeList">
-              <JweetsList jweets={jweets} />
+              <JweetsList jweetsLoaded={jweetsLoaded} jweets={jweets} />
             </CSSTransition>
           </div>
         </Fragment>

@@ -11,7 +11,7 @@ import UserContext from './UserContext';
 const UserProfile = props => {
   const { name } = props.match.params;
   const [jweets, setJweets] = useState([]);
-  const [statusCode, setStatusCode] = useState(0);
+  const [jweetsLoaded, setJweetsLoaded] = useState(false);
   let userContext = useContext(UserContext);
 
   useEffect(() => {
@@ -19,12 +19,12 @@ const UserProfile = props => {
       try {
         let response = await axios.get(`/api/jweets/user/${name}`);
         if (response.status === 200) {
+          setJweetsLoaded(true);
           setJweets(response.data.jweets);
-          setStatusCode(200);
         }
       } catch (err) {
         if (err.response.status === 404) {
-          setStatusCode(404);
+          setJweetsLoaded(true);
         }
       }
     };
@@ -38,7 +38,7 @@ const UserProfile = props => {
       <UserCard paramName={name} />
       <div className="UserHome-Timeline">
         <CSSTransition timeout={1000} classNames="UserHomeList">
-          <JweetsList statusCode={statusCode} jweets={jweets} />
+          <JweetsList jweetsLoaded={jweetsLoaded} jweets={jweets} />
         </CSSTransition>
       </div>
     </div>

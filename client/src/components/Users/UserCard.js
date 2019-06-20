@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CSSTransition } from 'react-transition-group';
 import UserContext from './UserContext';
 import FollowButton from '../FollowButton';
+import LoadingCircle from '../LoadingCircle';
 import '../../css/UserCard.css';
 import '../../css/Jweet.css';
 import '../../css/App.css';
@@ -26,18 +27,20 @@ const UserCard = props => {
       try {
         let response = await axios.get(`/api/users/${props.paramName}`);
         let jweets = await axios.get(`/api/jweets/user/${props.paramName}`);
-        if (response.status === 200) {
-          setUserState({ ...response.data });
-        }
         let timelineOfJweets = jweets.data.jweets;
-        let numOfJweetsByUser = timelineOfJweets.filter(jweet => {
+        let numOfJweetsByUser = await timelineOfJweets.filter(jweet => {
           return jweet.text;
         });
         setJweetsCount(numOfJweetsByUser.length);
-        setUserStateLoaded(true);
+        if (response.status === 200) {
+          setUserState({ ...response.data });
+          setUserStateLoaded(true);
+          setAccountExists(true);
+        }
       } catch (err) {
         if (err.response.status === 404) {
           setAccountExists(false);
+          setUserStateLoaded(true);
         }
       }
     };
@@ -45,65 +48,67 @@ const UserCard = props => {
   }, [props.paramName]);
 
   return accountExists ? (
-    <div className="whiteBox UserCard-Box">
+    <section>
       <CSSTransition
-        in={userStateLoaded}
-        timeout={1000}
-        classNames="UserCard-Heading"
+        in={!userStateLoaded}
+        timeout={500}
+        classNames="Loading"
+        unmountOnExit
       >
-        <div className="UserCard-Heading">
-          <Link className="link" to={`/${name}`}>
-            <h1 className="Heading">{name ? name : null}</h1>
-          </Link>
-
-          {bio ? <p className="UserCard-Bio">{bio ? bio : null}</p> : null}
-
-          {context.user.name === name ? (
-            <Link
-              className="link UserCard-Button UserCard-Edit"
-              to="/user/profile"
-            >
-              Edit Profile
+        <LoadingCircle />
+      </CSSTransition>
+      <CSSTransition
+        in={accountExists && userStateLoaded}
+        timeout={1000}
+        classNames="UserCard-Box"
+        mountOnEnter
+      >
+        <div className="whiteBox UserCard-Box">
+          <div className="UserCard-Heading">
+            <Link className="link" to={`/${name}`}>
+              <h1 className="Heading">{name ? name : null}</h1>
             </Link>
-          ) : (
-            <FollowButton buttonStyles={buttonStyles} name={name} />
-          )}
+
+            {bio ? <p className="UserCard-Bio">{bio ? bio : null}</p> : null}
+
+            {context.user.name === name ? (
+              <Link
+                className="link UserCard-Button UserCard-Edit"
+                to="/user/profile"
+              >
+                Edit Profile
+              </Link>
+            ) : (
+              <FollowButton buttonStyles={buttonStyles} name={name} />
+            )}
+          </div>
+          <div className="UserCard-StatBox">
+            <h3 className="UserCard-StatHeading">
+              Followers
+              <span className="UserCard-Stat">
+                {followers ? followers.length : 0}
+              </span>
+            </h3>
+
+            <h3 className="UserCard-StatHeading">
+              Following
+              <span className="UserCard-Stat">
+                {following ? following.length : 0}
+              </span>
+            </h3>
+
+            <h3 className="UserCard-StatHeading">
+              Jweets
+              <span className="UserCard-Stat">
+                {jweetsCount ? jweetsCount : 0}
+              </span>
+            </h3>
+          </div>
         </div>
       </CSSTransition>
-
-      <CSSTransition
-        in={userStateLoaded}
-        timeout={1000}
-        classNames="UserCard-StatBox"
-      >
-        <div className="UserCard-StatBox">
-          <h3 className="UserCard-StatHeading">
-            Followers
-            <span className="UserCard-Stat">
-              {followers ? followers.length : 0}
-            </span>
-          </h3>
-
-          <h3 className="UserCard-StatHeading">
-            Following
-            <span className="UserCard-Stat">
-              {following ? following.length : 0}
-            </span>
-          </h3>
-
-          <h3 className="UserCard-StatHeading">
-            Jweets
-            <span className="UserCard-Stat">
-              {jweetsCount ? jweetsCount : 0}
-            </span>
-          </h3>
-        </div>
-      </CSSTransition>
-    </div>
+    </section>
   ) : (
-    <CSSTransition timeout={1000} classNames="UserCard-Heading">
-      <div className="whiteBox Heading">Account {name} does not exist.</div>
-    </CSSTransition>
+    <div className="whiteBox Heading">Account doesn't exist.</div>
   );
 };
 

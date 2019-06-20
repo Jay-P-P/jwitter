@@ -6,4 +6,5 @@
 .ComposeJweet-Form {
   padding: 0.5rem;
   border-radius: 15px 15px 0 0;
+  border-bottom: 2px dotted #cad;
 }

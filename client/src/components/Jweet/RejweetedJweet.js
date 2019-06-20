@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaHourglass } from 'react-icons/fa';
 import axios from 'axios';
-import config from '../../config/RequestHeaders';
 import Jweet from './Jweet';
+import '../../css/Jweet.css';
 
 const RejweetedJweet = props => {
   const { jweet: rejweetedJweet } = props;
@@ -10,10 +11,7 @@ const RejweetedJweet = props => {
 
   useEffect(() => {
     const fetchJweet = async () => {
-      let response = await axios.get(
-        `/api/jweets/${rejweetedJweet.jweet._id}`,
-        config
-      );
+      let response = await axios.get(`/api/jweets/${rejweetedJweet.jweet._id}`);
       if (response.status === 200) {
         setJweet({ ...response.data.jweet });
       }
@@ -25,7 +23,7 @@ const RejweetedJweet = props => {
     <div>
       <p className="Jweet-Name Jweet-RejweetedName">
         <Link className="link" to={`/${rejweetedJweet.user.name}`}>
-          <i className="fas fa-retweet" />{' '}
+          <FaHourglass className="Jweet-ItalicSymbol" />{' '}
           {`${rejweetedJweet.user.name} rejweeted.`}
         </Link>
       </p>

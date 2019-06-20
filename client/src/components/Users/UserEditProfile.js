@@ -4,7 +4,6 @@ import InputBar from '../InputBar';
 import TextArea from '../TextArea';
 import UserContext from './UserContext';
 import '../../css/UserEditProfile.css';
-import config from '../../config/RequestHeaders';
 
 const UserEditProfile = props => {
   const { history } = props;
@@ -29,7 +28,7 @@ const UserEditProfile = props => {
     console.log(history);
 
     const body = JSON.stringify(newUser);
-    let response = await axios.patch(`/api/users/${name}`, body, config);
+    let response = await axios.patch(`/api/users/${name}`, body);
     if (response.status === 204) {
       history.push('/home');
     }

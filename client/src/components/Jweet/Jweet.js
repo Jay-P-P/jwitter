@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { IconContext } from 'react-icons';
 import JweetTime from './JweetTime';
 import LikeJweetButton from './LikeJweetButton';
 import '../../css/App.css';
@@ -29,26 +30,28 @@ const Jweet = props => {
       <div className="Jweet-TextBox">
         <p className="Jweet-Text">{text}</p>
       </div>
-      <div className="Jweet-StatBox">
-        <h3 className="Jweet-StatHeading">
-          {likes ? (
-            <LikeJweetButton
-              likes={likes}
-              updateJweet={updateJweet}
-              jweetId={_id}
-            />
-          ) : null}
-        </h3>
-        <h3 className="Jweet-StatHeading">
-          {rejweets ? (
-            <RejweetButton
-              rejweets={rejweets}
-              updateJweet={updateJweet}
-              jweetId={_id}
-            />
-          ) : null}
-        </h3>
-      </div>
+      <IconContext.Provider value={{ className: 'Jweet-Symbol' }}>
+        <div className="Jweet-StatBox">
+          <div className="Jweet-StatHeading">
+            {likes ? (
+              <LikeJweetButton
+                likes={likes}
+                updateJweet={updateJweet}
+                jweetId={_id}
+              />
+            ) : null}
+          </div>
+          <div className="Jweet-StatHeading">
+            {rejweets ? (
+              <RejweetButton
+                rejweets={rejweets}
+                updateJweet={updateJweet}
+                jweetId={_id}
+              />
+            ) : null}
+          </div>
+        </div>
+      </IconContext.Provider>
     </div>
   );
 };

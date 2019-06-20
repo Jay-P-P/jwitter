@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import UserContext from './UserContext';
-import config from '../../config/RequestHeaders';
 import UserCard from './UserCard';
 import '../../css/App.css';
 import '../../css/UsersList.css';
@@ -13,10 +12,11 @@ const UsersList = props => {
 
   useEffect(() => {
     const getUsers = async () => {
-      let users = await axios.get('/api/users/', config);
+      let users = await axios.get('/api/users/');
       await setUsersList({ ...users.data });
     };
     getUsers();
+    return () => {};
   }, []);
 
   return (

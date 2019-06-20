@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { FaRegHourglass, FaHourglass } from 'react-icons/fa';
 import axios from 'axios';
-import config from '../../config/RequestHeaders';
 import UserContext from '../Users/UserContext';
 import '../../css/Jweet.css';
 
@@ -27,11 +27,7 @@ const RejweetButton = props => {
 
   const rejweetJweet = async () => {
     try {
-      let response = await axios.post(
-        `/api/jweets/${jweetId}/rejweet`,
-        null,
-        config
-      );
+      let response = await axios.post(`/api/jweets/${jweetId}/rejweet`, null);
       if (response.status === 200) {
         setIsRejweeted(!isRejweeted);
         updateJweet(response.data);
@@ -51,9 +47,9 @@ const RejweetButton = props => {
       {clickedWithoutLogin ? <Redirect to="/login" /> : null}
       <button onClick={() => rejweetJweet()} className="Jweet-Button">
         {isRejweeted ? (
-          <i className="fas fa-hourglass Jweet-Rejweeted" />
+          <FaHourglass className="Jweet-Rejweeted" />
         ) : (
-          <i className="far fa-hourglass" />
+          <FaRegHourglass />
         )}
       </button>{' '}
       <span className="Jweet-Stat">{rejweets ? rejweets.length : 0}</span>

@@ -3,7 +3,6 @@ import axios from 'axios';
 import InputBar from '../InputBar';
 import '../../css/App.css';
 import '../../css/Register.css';
-import config from '../../config/RequestHeaders';
 
 const Register = props => {
   const { history } = props;
@@ -28,7 +27,7 @@ const Register = props => {
 
     try {
       const body = JSON.stringify(newUser);
-      let response = await axios.post('/api/users/register', body, config);
+      let response = await axios.post('/api/users/register', body);
       const { status } = response;
       if (status === 201) {
         history.push('/login');

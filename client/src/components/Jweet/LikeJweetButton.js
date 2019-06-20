@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import axios from 'axios';
-import config from '../../config/RequestHeaders';
 import UserContext from '../Users/UserContext';
 import '../../css/Jweet.css';
 
@@ -27,11 +27,7 @@ const LikeJweetButton = props => {
 
   const likeJweet = async () => {
     try {
-      let response = await axios.post(
-        `/api/jweets/${jweetId}/like`,
-        null,
-        config
-      );
+      let response = await axios.post(`/api/jweets/${jweetId}/like`, null);
       if (response.status === 200) {
         setIsLiked(!isLiked);
         console.log(response.data);
@@ -51,11 +47,7 @@ const LikeJweetButton = props => {
     <Fragment>
       {clickedWithoutLogin ? <Redirect to="/login" /> : null}
       <button onClick={() => likeJweet()} className="Jweet-Button">
-        {isLiked ? (
-          <i className="fas fa-heart Jweet-Liked" />
-        ) : (
-          <i className="far fa-heart" />
-        )}
+        {isLiked ? <FaHeart className="Jweet-Liked" /> : <FaRegHeart />}
       </button>{' '}
       <span className="Jweet-Stat">{likes ? likes.length : 0}</span>
     </Fragment>

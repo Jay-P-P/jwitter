@@ -1,0 +1,42 @@
+.Jweet-List {
+  border-radius: 0;
+}
+
+.Jweet-List-enter {
+  opacity: 0;
+  background: red;
+}
+
+.Jweet-List-enter-active {
+  opacity: 1;
+  background: blue;
+  transition: opacity 500ms ease;
+}
+
+.JweetInList-enter {
+  opacity: 0;
+  transform: translateY(101vh);
+}
+
+.JweetInList-enter-active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 1500ms ease, transform 800ms;
+}
+
+.JweetInList-exit {
+  display: none;
+}
+
+.JweetInList-exit-active {
+  display: none;
+}
+
+.NoJweets-exit {
+  background: red;
+}
+
+.NoJweets-exit-active {
+  background: blue;
+  transition: background 500ms ease;
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 import axios from 'axios';
-import config from '../../config/RequestHeaders';
 import UserCard from './UserCard';
 import JweetsList from '../Jweet/JweetsList';
 import '../../css/App.css';
@@ -11,13 +11,21 @@ import UserContext from './UserContext';
 const UserProfile = props => {
   const { name } = props.match.params;
   const [jweets, setJweets] = useState([]);
+  const [statusCode, setStatusCode] = useState(0);
   let userContext = useContext(UserContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      let response = await axios.get(`/api/jweets/user/${name}`, config);
-      if (response.status === 200) {
-        setJweets(response.data.jweets);
+      try {
+        let response = await axios.get(`/api/jweets/user/${name}`);
+        if (response.status === 200) {
+          setJweets(response.data.jweets);
+          setStatusCode(200);
+        }
+      } catch (err) {
+        if (err.response.status === 404) {
+          setStatusCode(404);
+        }
       }
     };
     fetchUserData();
@@ -29,7 +37,9 @@ const UserProfile = props => {
     <div className="container UserHome-Grid">
       <UserCard paramName={name} />
       <div className="UserHome-Timeline">
-        <JweetsList jweets={jweets} />
+        <CSSTransition timeout={1000} classNames="UserHomeList">
+          <JweetsList statusCode={statusCode} jweets={jweets} />
+        </CSSTransition>
       </div>
     </div>
   );

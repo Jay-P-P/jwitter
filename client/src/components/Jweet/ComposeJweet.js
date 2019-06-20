@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import InputBar from '../InputBar';
-import config from '../../config/RequestHeaders';
 import '../../css/App.css';
 import '../../css/ComposeJweet.css';
 import UserContext from '../Users/UserContext';
@@ -14,7 +13,7 @@ const ComposeJweet = props => {
 
   let userContext = useContext(UserContext);
 
-  const { history } = props;
+  const { onPostJweet } = props;
 
   const postJweet = async event => {
     event.preventDefault();
@@ -24,11 +23,11 @@ const ComposeJweet = props => {
         text
       };
       const body = JSON.stringify(jweet);
-      let response = await axios.post('/api/jweets/', body, config);
+      let response = await axios.post('/api/jweets/', body);
       if (response.status === 201) {
         await userContext.updateUser(userContext.user.name);
         setFormData({ ...formData, text: '' });
-        history.push('/home');
+        onPostJweet();
       }
     }
   };

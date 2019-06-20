@@ -19,11 +19,7 @@ router.post('/register', RegisterValidator, RegisterController);
 
 router.post('/login', LoginValidator, LoginController);
 
-router.get(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  UsersController.GetAllUsers
-);
+router.get('/', UsersController.GetAllUsers);
 
 router.get('/:name', UserValidator.nameValidator, UsersController.GetUser);
 

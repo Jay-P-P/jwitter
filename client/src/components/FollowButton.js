@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import config from '../config/RequestHeaders';
 import LoginContext from './Auth/LoginContext';
 import UserContext from './Users/UserContext';
 import '../css/App.css';
@@ -32,11 +31,7 @@ const FollowButton = props => {
 
   const toggleFollow = async () => {
     if (loginContext.isLoggedIn) {
-      let response = await axios.post(
-        `/api/users/${name}/follow`,
-        null,
-        config
-      );
+      let response = await axios.post(`/api/users/${name}/follow`, null);
       if (response.status === 200) {
         setIsFollowed(!isFollowed);
         await userContext.updateUser(userContext.user.name);

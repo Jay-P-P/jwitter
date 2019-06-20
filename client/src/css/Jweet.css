@@ -1,15 +1,10 @@
 .Jweet {
   margin: 0;
-  border-top: 2px dotted #cad;
   border-radius: 0;
 }
 
 .Jweet-Box {
   box-shadow: none;
-  border-radius: 0;
-}
-
-.Jweet-List {
   border-radius: 0;
 }
 
@@ -41,12 +36,16 @@
   font-size: 2rem;
 }
 
+.Jweet-StatHeading {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
 .Jweet-StatBox {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
   padding: 1rem;
-  font-size: 1.4rem;
 }
 
 .Jweet-Button {
@@ -77,4 +76,17 @@
   font-style: italic;
   width: 100%;
   color: black;
+  background: rgb(255, 255, 255);
+}
+
+.Jweet-Symbol {
+  vertical-align: top;
+}
+
+.Jweet-ItalicSymbol {
+  font-style: italic;
+}
+
+.Jweet-List .Jweet + .Jweet {
+  border-top: 2px dotted #cad;
 }

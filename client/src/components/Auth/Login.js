@@ -3,7 +3,6 @@ import axios from 'axios';
 import InputBar from '../InputBar';
 import '../../css/App.css';
 import '../../css/Login.css';
-import config from '../../config/RequestHeaders';
 import LoginContext from '../Auth/LoginContext';
 import UserContext from '../Users/UserContext';
 
@@ -28,7 +27,7 @@ const Login = props => {
 
     try {
       const body = JSON.stringify(user);
-      let response = await axios.post('/api/users/login', body, config);
+      let response = await axios.post('/api/users/login', body);
       const { status } = response;
       if (status === 200) {
         loginContext.loginUser();

@@ -45,9 +45,8 @@ router.post(
 );
 
 router.patch(
-  '/:name',
+  '/',
   passport.authenticate('jwt', { session: false }),
-  UserValidator.updateUserValidator,
   UsersController.UpdateUser
 );
 

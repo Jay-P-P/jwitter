@@ -8,12 +8,16 @@ import '../../css/UserEditProfile.css';
 const UserEditProfile = props => {
   const { history } = props;
   let userContext = useContext(UserContext);
-  const [formData, setFormData] = useState({
-    name: userContext.user.name,
-    password: '',
-    bio: userContext.user.bio,
-    email: userContext.user.email
+  const [formData, setFormData] = useState(() => {
+    return {
+      name: userContext.user.name,
+      password: '',
+      bio: userContext.user.bio,
+      email: userContext.user.email
+    };
   });
+
+  let [validationErrors, setValidationErrors] = useState({});
 
   const { name, email, bio } = formData;
 
@@ -23,14 +27,23 @@ const UserEditProfile = props => {
     let newUser = {
       email,
       name,
-      bio
+      bio,
+      id: userContext.user._id
     };
-    console.log(history);
 
     const body = JSON.stringify(newUser);
-    let response = await axios.patch(`/api/users/${name}`, body);
-    if (response.status === 204) {
-      history.push('/home');
+    console.log(body);
+    try {
+      let response = await axios.patch(`/api/users`, body);
+      if (response.status === 204) {
+        await userContext.updateUser(name);
+        history.push('/home');
+      }
+    } catch (err) {
+      const { status, data } = err.response;
+      if (status === 400) {
+        setValidationErrors({ ...data });
+      }
     }
   };
 
@@ -47,7 +60,11 @@ const UserEditProfile = props => {
           useInput={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
-        />
+        >
+          {validationErrors['name'] && (
+            <p className="Error">{validationErrors['name']}</p>
+          )}
+        </InputBar>
         <InputBar
           inputType="text"
           labelName="Email"
@@ -57,7 +74,11 @@ const UserEditProfile = props => {
           useInput={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
-        />
+        >
+          {validationErrors['email'] && (
+            <p className="Error">{validationErrors['email']}</p>
+          )}
+        </InputBar>
         <TextArea
           labelName="Bio"
           className="UserEditProfile-TextArea"

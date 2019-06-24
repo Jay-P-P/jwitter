@@ -30,7 +30,6 @@
 
 .input, .textarea {
   font-size: 1.6rem;
-  color: slateblue;
   height: 4rem;
   display: block;
   padding: 0 0.5rem;
@@ -39,7 +38,6 @@
 
 .label {
   font-size: 2rem;
-  color: slateblue;
   display: block;
   margin: 1rem 2rem;
 }
@@ -89,6 +87,7 @@
   overflow: hidden;
   font-size: 1.5rem;
   padding: 0.5rem;
+  transition: all 500ms ease;
 }
 
 .page-enter {

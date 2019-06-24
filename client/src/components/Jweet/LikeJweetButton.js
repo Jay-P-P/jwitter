@@ -30,15 +30,11 @@ const LikeJweetButton = props => {
       let response = await axios.post(`/api/jweets/${jweetId}/like`, null);
       if (response.status === 200) {
         setIsLiked(!isLiked);
-        console.log(response.data);
         updateJweet(response.data);
       }
     } catch (err) {
-      switch (err.response.status) {
-        case 401:
-          setClickedWithoutLogin(true);
-          break;
-        default:
+      if (err.response.status === 401) {
+        setClickedWithoutLogin(true);
       }
     }
   };

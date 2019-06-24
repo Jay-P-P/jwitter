@@ -135,24 +135,40 @@ const UsersController = {
   },
   UpdateUser: async (req, res, next) => {
     const { id } = req.user;
-    const { name: paramName } = req.params;
-    console.log(req.body);
-    const { name, email, bio, password } = req.body;
-    let user = await User.findOne({ name: paramName });
-    if (user.id != id) {
+    const { name, email, bio, password, id: userId } = req.body;
+    let userToUpdate = await User.findById(userId); // Find the user we are updating.
+
+    if (userId !== id) {
       return res
-        .status(401)
-        .json({ unauthorized: 'You are not authorized to update this user.' });
+        .json(401)
+        .json({ notAuthorized: 'Not authorized to update this user.' });
     }
 
     if (name) {
-      if (name !== user.name) user.name = name;
+      if (name !== userToUpdate.name) {
+        let isNameAlreadyInUse = await User.findOne({ name }); // Does a user already have this name.
+        if (isNameAlreadyInUse === null) {
+          console.log(`Updating name ${userToUpdate.name} to new name ${name}`);
+          userToUpdate.name = name;
+        } else {
+          return res.status(400).json({ name: 'Name is already taken.' });
+        }
+      }
     }
     if (email) {
-      if (email !== user.email) user.email = email;
+      if (email !== userToUpdate.email) {
+        let isEmailAlreadyInUse = await User.findOne({ email }); // Does an account already use this email.
+        if (!isEmailAlreadyInUse) {
+          userToUpdate.email = email;
+        } else {
+          return res.status(400).json({ email: 'Email is already taken.' });
+        }
+      }
     }
     if (bio) {
-      if (bio !== user.bio) user.bio = bio;
+      if (bio !== userToUpdate.bio) {
+        userToUpdate.bio = bio;
+      }
     }
     if (password) {
       bcrypt.genSalt(13, (err, salt) => {
@@ -164,7 +180,7 @@ const UsersController = {
       });
     }
 
-    let updatedUser = await user.save();
+    await userToUpdate.save();
     return res.status(204).json();
   }
 };

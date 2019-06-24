@@ -16,3 +16,14 @@
   transform: translateY(4px);
   box-shadow: none;
 }
+
+.Login-RegisterOption {
+  text-align: center;
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 0.5rem;
+}
+
+.Login-RegisterOption:visited {
+  color: #000;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import InputBar from '../InputBar';
 import '../../css/App.css';
@@ -54,10 +55,8 @@ const Login = props => {
     <div className="container">
       <form onSubmit={e => login(e)} className="whiteBox">
         <h1 className="Heading">Login</h1>
-        {validationErrors['login'] ? (
+        {validationErrors['login'] && (
           <p className="Error">{validationErrors['login']}</p>
-        ) : (
-          ''
         )}
         <InputBar
           inputType="text"
@@ -69,10 +68,8 @@ const Login = props => {
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >
-          {validationErrors['email'] ? (
+          {validationErrors['email'] && (
             <p className="Error">{validationErrors['email']}</p>
-          ) : (
-            ''
           )}
         </InputBar>
         <InputBar
@@ -85,15 +82,16 @@ const Login = props => {
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >
-          {validationErrors['password'] ? (
+          {validationErrors['password'] && (
             <p className="Error">{validationErrors['password']}</p>
-          ) : (
-            ''
           )}
         </InputBar>
         <button type="submit" className="Button Login-LoginBtn">
           Login
         </button>
+        <p className="Login-RegisterOption">
+          No account? <Link to="/register">Sign up here.</Link>
+        </p>
       </form>
     </div>
   );

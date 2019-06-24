@@ -25,7 +25,7 @@ const Jweet = props => {
             </Link>
           </div>
         ) : null}
-        {date ? <JweetTime date={date} /> : ''}
+        {date && <JweetTime date={date} />}
       </div>
       <div className="Jweet-TextBox">
         <p className="Jweet-Text">{text}</p>
@@ -33,22 +33,22 @@ const Jweet = props => {
       <IconContext.Provider value={{ className: 'Jweet-Symbol' }}>
         <div className="Jweet-StatBox">
           <div className="Jweet-StatHeading">
-            {likes ? (
+            {likes && (
               <LikeJweetButton
                 likes={likes}
                 updateJweet={updateJweet}
                 jweetId={_id}
               />
-            ) : null}
+            )}
           </div>
           <div className="Jweet-StatHeading">
-            {rejweets ? (
+            {rejweets && (
               <RejweetButton
                 rejweets={rejweets}
                 updateJweet={updateJweet}
                 jweetId={_id}
               />
-            ) : null}
+            )}
           </div>
         </div>
       </IconContext.Provider>

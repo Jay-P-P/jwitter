@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import InputBar from '../InputBar';
 import '../../css/App.css';
@@ -57,10 +58,8 @@ const Register = props => {
           }
           className="RegisterInputBar"
         >
-          {validationErrors['name'] ? (
+          {validationErrors['name'] && (
             <p className="Error">{validationErrors['name']}</p>
-          ) : (
-            ''
           )}
         </InputBar>
         <InputBar
@@ -73,10 +72,8 @@ const Register = props => {
           }
           className="RegisterInputBar"
         >
-          {validationErrors['email'] ? (
+          {validationErrors['email'] && (
             <p className="Error">{validationErrors['email']}</p>
-          ) : (
-            ''
           )}
         </InputBar>
         <InputBar
@@ -89,10 +86,8 @@ const Register = props => {
           }
           className="RegisterInputBar"
         >
-          {validationErrors['password'] ? (
+          {validationErrors['password'] && (
             <p className="Error">{validationErrors['password']}</p>
-          ) : (
-            ''
           )}
         </InputBar>
         <InputBar
@@ -105,15 +100,16 @@ const Register = props => {
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >
-          {validationErrors['passwordConfirmation'] ? (
+          {validationErrors['passwordConfirmation'] && (
             <p className="Error">{validationErrors['passwordConfirmation']}</p>
-          ) : (
-            ''
           )}
         </InputBar>
         <button type="submit" className="Button Register-RegisterBtn">
           Register
         </button>
+        <p className="Register-LoginOption">
+          Have an account? <Link to="/login">Sign in</Link>
+        </p>
       </form>
     </div>
   );

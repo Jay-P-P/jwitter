@@ -5,26 +5,17 @@
   display: flex;
 }
 
-.JweetsList-Jweet div {
+.JweetsList-Jweet > div {
   width: 100%;
 }
 
 .JweetsList-Jweet .DeleteJweetButton {
   position: absolute;
-  left: 100%;
+  right: 0%;
   width: max-content;
 }
 
-@media only screen and (max-width: 480px) {
-  .JweetsList-Jweet div {
-    width: 100%;
-  }
-  .JweetsList-Jweet .DeleteJweetButton {
-    position: absolute;
-    left: 100%;
-    width: max-content;
-  }
-
+@media only screen and (max-width: 680px) {
   .JweetsList-Jweet .DeleteJweetButton button {
     font-size: 5rem;
   }

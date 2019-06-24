@@ -18,6 +18,7 @@ import UserEditProfile from './components/Users/UserEditProfile';
 
 axios.defaults.headers.get['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.patch['Content-Type'] = 'application/json';
 axios.defaults.withCredentials = true;
 
 function App() {

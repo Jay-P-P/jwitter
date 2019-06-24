@@ -104,15 +104,15 @@ const JweetsController = {
       .populate('user', 'name')
       .populate('jweet', 'user');
 
-    likedJweets.map(jweet => {
-      if (String(jweet.user.id) !== String(jweet.jweet.user)) {
-        response.push(jweet);
+    likedJweets.map(likedJweet => {
+      if (String(likedJweet.user.id) !== String(likedJweet.jweet.user)) {
+        response.push(likedJweet);
       }
     });
 
-    rejweetedJweets.map(jweet => {
-      if (String(jweet.user.id) !== String(jweet.jweet.user)) {
-        response.push(jweet);
+    rejweetedJweets.map(Rejweet => {
+      if (String(Rejweet.user.id) !== String(Rejweet.jweet.user)) {
+        response.push(Rejweet);
       }
     });
 
@@ -265,10 +265,17 @@ const JweetsController = {
 
     let jweet = await Jweet.findById(id);
     if (String(jweet.user) === String(userId)) {
-      Jweet.findByIdAndDelete(id, (err, res) => {
-        if (err) {
-          return res.status(500).json({ success: false, error: err });
-        }
+      Jweet.findByIdAndDelete(id).then(async deletedJweet => {
+        let likedJweets = await Like.find({ jweet: deletedJweet.id });
+        let rejweets = await Rejweet.find({ jweet: deletedJweet.id });
+        await Promise.all([
+          likedJweets.forEach(async like => {
+            await Like.findByIdAndDelete(like.id);
+          }),
+          rejweets.forEach(async rejweet => {
+            await Rejweet.findByIdAndDelete(rejweet._id);
+          })
+        ]).catch(error => console.log(error));
       });
     }
     res.status(200).json({ success: true });

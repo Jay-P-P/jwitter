@@ -10,14 +10,21 @@ const RejweetedJweet = props => {
   const [jweet, setJweet] = useState({});
 
   useEffect(() => {
+    let unmounted = false;
     const fetchJweet = async () => {
       let response = await axios.get(`/api/jweets/${rejweetedJweet.jweet._id}`);
       if (response.status === 200) {
-        setJweet({ ...response.data.jweet });
+        if (!unmounted) {
+          setJweet({ ...response.data.jweet });
+        }
       }
     };
     fetchJweet();
-  }, [rejweetedJweet]);
+
+    return () => {
+      unmounted = true;
+    };
+  }, [rejweetedJweet.jweet._id]);
 
   return (
     <div>

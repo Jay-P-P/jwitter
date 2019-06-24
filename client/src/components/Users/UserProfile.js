@@ -17,6 +17,9 @@ const UserProfile = props => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        if (name === userContext.user.name) {
+          return;
+        }
         let response = await axios.get(`/api/jweets/user/${name}`);
         if (response.status === 200) {
           setJweetsLoaded(true);
@@ -29,7 +32,7 @@ const UserProfile = props => {
       }
     };
     fetchUserData();
-  }, [name]);
+  }, [name, userContext.user.name]);
 
   return name === userContext.user.name ? (
     <Redirect to="/home" />

@@ -1,0 +1,100 @@
+.Landing-Grid {
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "Heading Heading"
+    "Register Login"
+    "Alternative Alternative";
+  justify-items: center;
+  height: auto;
+}
+
+.Landing-Heading, .Landing-Alternative {
+  grid-area: Heading;
+  text-align: center;
+  font-size: 5rem;
+  width: 50vw;
+}
+
+.Landing-Alternative {
+  font-size: 2.5rem;
+  grid-area: Alternative;
+}
+
+.Landing-Special {
+  animation-name: Rainbow;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes Rainbow {
+  0% {
+    color: red;
+  }
+
+  15% {
+    color: orange;
+  }
+
+  30% {
+    color: yellow;
+  }
+
+  45% {
+    color: green;
+  }
+
+  60% {
+    color: blue;
+  }
+
+  75% {
+    color: indigo;
+  }
+
+  90% {
+    color: violet;
+  }
+
+  100% {
+    color: red;
+  }
+}
+
+.Button:visited {
+  color: white;
+}
+
+.Landing-RegisterBtn, .Landing-LoginBtn {
+  border-radius: 20px;
+  box-shadow: 0px 5px 5px -3px black;
+  width: 50%;
+}
+
+.Landing-RegisterBtn {
+  grid-area: Register;
+  justify-self: flex-end;
+  background-color: hsl(0, 50%, 50%);
+}
+
+.Landing-LoginBtn {
+  grid-area: Login;
+  justify-self: flex-start;
+  background-color: hsl(240, 50%, 50%);
+}
+
+.Landing-RegisterBtn:hover, .Landing-LoginBtn:hover {
+  box-shadow: 0px 10px 5px -5px black;
+}
+
+.Landing-RegisterBtn:active, .Landing-LoginBtn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+.Landing-RegisterBtn:hover {
+  background-color: hsl(0, 50%, 40%);
+}
+
+.Landing-LoginBtn:hover {
+  background-color: hsl(240, 50%, 40%);
+}

@@ -1,0 +1,11 @@
+.DeleteJweetButton button {
+  border: 0;
+  color: white;
+  background-color: black;
+  font-size: 2rem;
+  padding: 0 0.5rem;
+}
+
+.DeleteJweetButton button:hover {
+  background-color: red;
+}

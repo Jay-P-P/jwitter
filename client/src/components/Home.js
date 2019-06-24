@@ -1,5 +1,6 @@
-import React, { Fragment, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import Landing from './Landing';
 import '../css/Home.css';
 import '../css/App.css';
 import LoginContext from './Auth/LoginContext';
@@ -7,20 +8,7 @@ import LoginContext from './Auth/LoginContext';
 const Home = props => {
   let context = useContext(LoginContext);
   return (
-    <div className="container Home-Grid">
-      {!context.isLoggedIn ? (
-        <Fragment>
-          <Link className="Button Home-RegisterBtn" to="/register">
-            Register
-          </Link>
-          <Link className="Button Home-LoginBtn" to="/login">
-            Login
-          </Link>
-        </Fragment>
-      ) : (
-        <Redirect to="/home" />
-      )}
-    </div>
+    <div>{!context.isLoggedIn ? <Landing /> : <Redirect to="/home" />}</div>
   );
 };
 

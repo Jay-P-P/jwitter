@@ -23,6 +23,7 @@ const UserCard = props => {
   };
 
   useEffect(() => {
+    let unmounted = false;
     const fetchData = async () => {
       try {
         let response = await axios.get(`/api/users/${props.paramName}`);
@@ -33,9 +34,11 @@ const UserCard = props => {
         });
         setJweetsCount(numOfJweetsByUser.length);
         if (response.status === 200) {
-          setUserState({ ...response.data });
-          setUserStateLoaded(true);
-          setAccountExists(true);
+          if (!unmounted) {
+            setUserState({ ...response.data });
+            setUserStateLoaded(true);
+            setAccountExists(true);
+          }
         }
       } catch (err) {
         if (err.response.status === 404) {
@@ -45,10 +48,14 @@ const UserCard = props => {
       }
     };
     fetchData();
-  }, [props.paramName]);
+
+    return () => {
+      unmounted = true;
+    };
+  }, [props.paramName, context]);
 
   return accountExists ? (
-    <section>
+    <>
       <CSSTransition
         in={!userStateLoaded}
         timeout={500}
@@ -106,7 +113,7 @@ const UserCard = props => {
           </div>
         </div>
       </CSSTransition>
-    </section>
+    </>
   ) : (
     <div className="whiteBox Heading">Account doesn't exist.</div>
   );

@@ -25,17 +25,18 @@ const JweetsController = {
 
     let response = [];
     followingList.push(id); // Adding our own id so we can get our own jweets on the timeline.
-    likedJweets.map(jweet => {
-      if (String(jweet.jweet.user) !== String(id)) {
-        if (String(jweet.jweet.user) !== String(jweet.user.id))
-          response.push(jweet);
+
+    likedJweets.forEach(likedJweet => {
+      if (String(likedJweet.jweet.user) !== String(id)) {
+        if (String(likedJweet.jweet.user) !== String(likedJweet.user.id))
+          response.push(likedJweet);
       }
     });
 
-    rejweetedJweets.map(jweet => {
-      if (String(jweet.jweet.user) !== String(id)) {
-        if (String(jweet.jweet.user) !== String(jweet.user.id))
-          response.push(jweet);
+    rejweetedJweets.forEach(Rejweet => {
+      if (String(Rejweet.jweet.user) !== String(id)) {
+        if (String(Rejweet.jweet.user) !== String(Rejweet.user.id))
+          response.push(Rejweet);
       }
     });
 
@@ -138,7 +139,24 @@ const JweetsController = {
     });
 
     await jweet.save();
-    return res.status(201).json({ success: true, jweet });
+
+    let response = await Jweet.findById(jweet.id)
+      .populate('user', 'name')
+      .populate({
+        path: 'likes',
+        populate: {
+          path: 'user',
+          select: 'name'
+        }
+      })
+      .populate({
+        path: 'rejweets',
+        populate: {
+          path: 'user',
+          select: 'name'
+        }
+      });
+    return res.status(201).json({ success: true, jweet: response });
   },
   ToggleLikeJweet: async (req, res, next) => {
     const errors = validationResult(req).formatWith(errorFormatter);
@@ -243,14 +261,13 @@ const JweetsController = {
     }
 
     const { id } = req.params;
-    const { userId } = req.user;
+    const userId = req.user.id;
 
     let jweet = await Jweet.findById(id);
-
-    if (jweet.user === userId) {
-      await Jweet.findByIdAndDelete(id, (err, res) => {
+    if (String(jweet.user) === String(userId)) {
+      Jweet.findByIdAndDelete(id, (err, res) => {
         if (err) {
-          return res.status(500).json({ error: err });
+          return res.status(500).json({ success: false, error: err });
         }
       });
     }

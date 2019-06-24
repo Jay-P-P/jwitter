@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { CSSTransition } from 'react-transition-group';
 import UserContext from './UserContext';
 import LoginContext from '../Auth/LoginContext';
 import UserCard from '../Users/UserCard';
@@ -17,12 +16,18 @@ const UserHome = props => {
   const [jweetsLoaded, setJweetsLoaded] = useState(false);
 
   useEffect(() => {
+    let unmounted = false;
     const getJweets = async () => {
       try {
+        if (jweets.length > 0) {
+          return;
+        }
         let response = await axios.get(`/api/jweets/`);
         if (response.status === 200) {
-          setJweets(response.data.jweets);
-          setJweetsLoaded(true);
+          if (!unmounted) {
+            setJweets(response.data.jweets);
+            setJweetsLoaded(true);
+          }
         }
       } catch (err) {
         if (err.response.status === 404) {
@@ -31,12 +36,27 @@ const UserHome = props => {
       }
     };
     getJweets();
-    return () => {};
-  }, [userContext]);
+    return () => {
+      unmounted = true;
+    };
+  }, [jweets.length, userContext]);
 
-  const updateJweets = () => {
-    console.log('Updating jweets');
-    setJweets([]);
+  const updateJweets = newJweet => {
+    setJweets([newJweet.jweet, ...jweets]);
+    userContext.updateUser(userContext.user.name);
+  };
+
+  const removeJweet = id => {
+    let index = jweets.findIndex(jweet => {
+      return jweet._id === id;
+    });
+    setJweetsLoaded(false);
+    setJweets(state => [
+      ...state.slice(0, index),
+      ...state.slice(index + 1, state.length)
+    ]);
+    setJweetsLoaded(true);
+    userContext.updateUser(userContext.user.name);
   };
 
   return (
@@ -46,9 +66,11 @@ const UserHome = props => {
           <UserCard paramName={userContext.user.name} />
           <div className="UserHome-Timeline">
             <ComposeJweet onPostJweet={updateJweets} />
-            <CSSTransition timeout={1000} classNames="UserHomeList">
-              <JweetsList jweetsLoaded={jweetsLoaded} jweets={jweets} />
-            </CSSTransition>
+            <JweetsList
+              onDeleteJweet={removeJweet}
+              jweetsLoaded={jweetsLoaded}
+              jweets={jweets}
+            />
           </div>
         </Fragment>
       ) : (

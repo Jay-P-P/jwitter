@@ -26,8 +26,8 @@ const ComposeJweet = props => {
       let response = await axios.post('/api/jweets/', body);
       if (response.status === 201) {
         await userContext.updateUser(userContext.user.name);
-        setFormData({ ...formData, text: '' });
-        onPostJweet();
+        setFormData({ text: '' });
+        onPostJweet(response.data);
       }
     }
   };

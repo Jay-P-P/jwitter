@@ -3,6 +3,7 @@
   grid: auto-flow dense / repeat(auto-fit, 300px);
   grid-gap: 10px;
   justify-content: center;
+  justify-items: stretch;
   align-content: center;
   align-items: center;
   width: 95%;
@@ -44,7 +45,7 @@
 }
 
 .whiteBox {
-  background-color: rgb(255, 255, 255);
+  background-color: #fff;
   box-shadow: 0px 5px 10px -5px black;
   border-radius: 15px;
 }

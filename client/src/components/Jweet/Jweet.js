@@ -18,13 +18,13 @@ const Jweet = props => {
   return (
     <div className="whiteBox Jweet-Box">
       <div className="Jweet-User">
-        <p className="Jweet-Name">
-          {user ? (
+        {user ? (
+          <div className="Jweet-Name">
             <Link className="link" to={`/${user.name}`}>
               {`${user.name}`}
             </Link>
-          ) : null}
-        </p>
+          </div>
+        ) : null}
         {date ? <JweetTime date={date} /> : ''}
       </div>
       <div className="Jweet-TextBox">

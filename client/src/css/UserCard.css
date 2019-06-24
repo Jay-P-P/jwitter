@@ -9,7 +9,7 @@
 
 .UserCard-Box-enter-active {
   opacity: 1;
-  transition: opacity 1000ms ease-in-out;
+  transition: all 500ms ease-in-out;
 }
 
 .UserCard-Heading {

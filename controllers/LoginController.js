@@ -26,10 +26,10 @@ module.exports = LoginController = async (req, res, next) => {
 
   const { id, name } = user;
   const payload = { id, name };
-  const secretOrKey = config.get('secretOrKey');
+  const secretOrKey = process.env.SECRETORKEY || config.get('secretOrKey');
   const signOptions = {
-    issuer: config.get('jwtIssuer'),
-    audience: config.get('jwtAudience'),
+    issuer: process.env.JWT_ISSUER || config.get('jwtIssuer'),
+    audience: process.env.JWT_AUDIENCE || config.get('jwtAudience'),
     expiresIn: 3600
   };
   await jwt.sign(payload, secretOrKey, signOptions, (err, encoded) => {

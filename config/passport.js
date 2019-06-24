@@ -12,9 +12,9 @@ const cookieExtractor = function(req) {
 
 const opts = {};
 opts.jwtFromRequest = cookieExtractor;
-opts.secretOrKey = process.env.secretOrKey || config.get('secretOrKey');
-opts.issuer = config.get('jwtIssuer');
-opts.audience = config.get('jwtAudience');
+opts.secretOrKey = process.env.SECRETORKEY || config.get('secretOrKey');
+opts.issuer = process.env.JWT_ISSUER || config.get('jwtIssuer');
+opts.audience = process.env.JWT_AUDIENCE || config.get('jwtAudience');
 module.exports = passport => {
   passport.use(
     new JwtStrategy(opts, function(jwt_payload, done) {

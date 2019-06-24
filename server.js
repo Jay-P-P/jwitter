@@ -9,7 +9,7 @@ const UsersRouter = require('./routes/api/users');
 const JweetsRouter = require('./routes/api/jweets');
 
 const app = express();
-const mongoURI = process.env.mongoURI || config.get('mongoURI');
+const mongoURI = process.env.MONGO_URI || config.get('mongoURI');
 const db = mongoose
   .connect(mongoURI, { useNewUrlParser: true })
   .then(() => {})

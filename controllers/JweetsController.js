@@ -96,19 +96,9 @@ const JweetsController = {
 
     let response = [...jweets];
 
-    let likedJweets = await Like.find({ user: user.id })
-      .populate('user', 'name')
-      .populate('jweet', 'user');
-
     let rejweetedJweets = await Rejweet.find({ user: user.id })
       .populate('user', 'name')
       .populate('jweet', 'user');
-
-    likedJweets.map(likedJweet => {
-      if (String(likedJweet.user.id) !== String(likedJweet.jweet.user)) {
-        response.push(likedJweet);
-      }
-    });
 
     rejweetedJweets.map(Rejweet => {
       if (String(Rejweet.user.id) !== String(Rejweet.jweet.user)) {

@@ -65,7 +65,7 @@ const JweetsList = props => {
       <TransitionGroup>
         <>
           {(jweetsLoaded && jweets.length === 0 && (
-            <CSSTransition timeout={500} classNames="JweetInList" unmountOnExit>
+            <CSSTransition timeout={500} classNames="JweetInList">
               <div className="whiteBox Heading">No jweets.</div>
             </CSSTransition>
           )) ||

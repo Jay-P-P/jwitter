@@ -4,10 +4,6 @@
   position: relative;
 }
 
-.JweetsList-Jweet > div {
-  width: 100%;
-}
-
 .JweetsList-Jweet .DeleteJweetButton {
   position: absolute;
   right: 0;

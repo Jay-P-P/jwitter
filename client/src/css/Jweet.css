@@ -1,8 +1,8 @@
 .Jweet-Box {
   box-shadow: none;
   border-radius: 0;
-  max-width: 100%;
   background-color: #fff;
+  width: 30vw;
 }
 
 .Jweet-User {
@@ -85,4 +85,10 @@
 
 .Jweet-ItalicSymbol {
   font-style: italic;
+}
+
+@media only screen and (min-width: 3000px) {
+  .Jweet-Box {
+    width: 20vw;
+  }
 }

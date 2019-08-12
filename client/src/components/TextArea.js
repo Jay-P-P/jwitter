@@ -10,8 +10,15 @@ const TextArea = props => {
     className,
     placeHolder,
     name,
-    value
+    value,
+    onSubmit
   } = props;
+
+  const shortcutSubmit = e => {
+    if (e.ctrlKey) {
+      onSubmit(e);
+    }
+  };
 
   return (
     <label className="label">
@@ -25,6 +32,7 @@ const TextArea = props => {
         name={name}
         value={value}
         onChange={e => props.useInput(e)}
+        onKeyPressCapture={e => shortcutSubmit(e)}
       />
     </label>
   );

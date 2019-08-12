@@ -2,7 +2,6 @@
   margin: 0;
   border-radius: 0;
   position: relative;
-  display: flex;
 }
 
 .JweetsList-Jweet > div {
@@ -11,8 +10,9 @@
 
 .JweetsList-Jweet .DeleteJweetButton {
   position: absolute;
-  right: 0%;
-  width: max-content;
+  right: 0;
+  top: 0;
+  width: auto;
 }
 
 @media only screen and (max-width: 680px) {

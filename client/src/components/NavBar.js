@@ -8,12 +8,18 @@ const NavBar = () => {
     <nav className="NavBar">
       <ul className="NavBar-ul">
         <li className="NavBar-li">
-          <Link className="NavBar-Link" to="/">
-            Jwitter
+          <Link className="NavBar-Link Logo" to="/">
+            <span>J</span>
+            <span>w</span>
+            <span>i</span>
+            <span>t</span>
+            <span>t</span>
+            <span>e</span>
+            <span>r</span>
           </Link>
         </li>
         <li className="NavBar-li">
-          <Link className="NavBar-Link" to="/users">
+          <Link className="NavBar-Link Link" to="/users">
             Users
           </Link>
         </li>

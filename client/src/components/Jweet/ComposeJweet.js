@@ -1,15 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import InputBar from '../InputBar';
 import '../../css/App.css';
 import '../../css/ComposeJweet.css';
 import UserContext from '../Users/UserContext';
+import TextArea from '../TextArea';
 
 const ComposeJweet = props => {
   const [formData, setFormData] = useState({
     text: ''
   });
+
+  const formRef = useRef(null);
 
   let userContext = useContext(UserContext);
 
@@ -36,18 +38,24 @@ const ComposeJweet = props => {
 
   return (
     <div>
-      <form className="whiteBox ComposeJweet-Form" onSubmit={e => postJweet(e)}>
-        <h1 className="Heading">Compose a new jweet</h1>
-        <InputBar
-          inputType="text"
+      <form
+        className="whiteBox ComposeJweet-Form"
+        ref={formRef}
+        onSubmit={e => postJweet(e)}
+      >
+        <h1 className="Heading">Compose Jweet</h1>
+        <TextArea
           placeHolder="Start a new jweet..."
-          className="ComposeJweet-InputBar"
+          className="ComposeJweet-TextArea"
           name="text"
           value={text}
+          maxlength="140"
           useInput={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
+          onSubmit={postJweet}
         />
+        <button className="ComposeJweet-Button">Jweet!</button>
       </form>
     </div>
   );

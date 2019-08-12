@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import axios from 'axios';
 import UserContext from '../Users/UserContext';
 import '../../css/DeleteJweetButton.css';
@@ -6,6 +6,7 @@ import '../../css/DeleteJweetButton.css';
 const DeleteJweetButton = props => {
   const { id, jweetAuthor, onDelete } = props;
   const userContext = useContext(UserContext);
+  const button = useRef(null);
 
   const deleteJweet = async () => {
     let response = await axios.delete(`/api/jweets/${id}`);
@@ -17,7 +18,14 @@ const DeleteJweetButton = props => {
   return (
     userContext.user.name === jweetAuthor && (
       <div className="DeleteJweetButton">
-        <button onClick={() => deleteJweet()}>&times;</button>
+        <button
+          ref={button}
+          onMouseOver={() => (button.current.innerText = 'Delete')}
+          onMouseLeave={() => (button.current.innerText = 'x')}
+          onClick={() => deleteJweet()}
+        >
+          &times;
+        </button>
       </div>
     )
   );

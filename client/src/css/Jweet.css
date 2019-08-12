@@ -1,6 +1,8 @@
 .Jweet-Box {
   box-shadow: none;
   border-radius: 0;
+  max-width: 100%;
+  background-color: #fff;
 }
 
 .Jweet-User {
@@ -12,7 +14,7 @@
 }
 
 .Jweet-Name {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2rem;
   font-size: 1.6rem;
 }
 
@@ -23,11 +25,11 @@
 
 .Jweet-TextBox {
   width: 100%;
-  padding: 2rem;
+  padding: 1rem 2rem;
 }
 
 .Jweet-Text {
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 
 .Jweet-StatHeading {
@@ -38,7 +40,7 @@
 .Jweet-StatBox {
   text-align: center;
   width: 100%;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
 }
 
 .Jweet-StatBox .Jweet-StatHeading {

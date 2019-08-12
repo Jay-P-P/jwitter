@@ -4,9 +4,11 @@
   font-size: 2rem;
   background: inherit;
   padding: 0 0.5rem;
+  transition: all 500ms ease-in-out;
 }
 
 .DeleteJweetButton button:hover {
   background-color: red;
   color: white;
+  cursor: pointer;
 }

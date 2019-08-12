@@ -1,16 +1,15 @@
 .NavBar {
-  background-color: #000;
-  box-shadow: 0px 1px white;
-  width: 100%;
+  text-align: center;
+  margin: 0 auto;
   position: fixed;
   top: 0;
   left: 0;
-  color: white;
   z-index: 1;
 }
 
 .NavBar-Link {
   text-decoration: none;
+  text-transform: uppercase;
   color: white;
 }
 
@@ -20,20 +19,57 @@
   font-size: 2rem;
 }
 
+.Logo {
+  display: grid;
+  grid-template-columns: repeat(3, 25px);
+  grid-template-rows: repeat(4, 25px);
+  grid-gap: 5px;
+  text-transform: uppercase;
+}
+
+.Logo span {
+  background-color: #fff;
+}
+
+.Logo span:nth-child(4) {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.Logo span:nth-child(5) {
+  grid-row: 3;
+  grid-column: 2;
+}
+
+.Logo span:nth-child(6) {
+  grid-row: 4;
+  grid-column: 1;
+}
+
+.Logo span:nth-child(7) {
+  grid-row: 4;
+  grid-column: 2;
+}
+
+.Link {
+  background-color: #fff;
+  padding: 1rem;
+}
+
 .NavBar-Link:visited {
   color: inherit;
 }
 
 .NavBar-li:hover {
-  background-color: #dac;
+  color: #0bf;
 }
 
 .NavBar-ul {
   list-style: none;
   display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
+  flex-flow: column wrap;
+  width: auto;
+  align-items: flex-start;
 }
 
 .NavBar-Register {
@@ -42,4 +78,24 @@
 
 .NavBar-Login {
   align-self: flex-end;
+}
+
+@media only screen and (max-width: 900px) {
+  .NavBar {
+    position: static;
+  }
+  .NavBar-ul {
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+  }
+  .Logo {
+    grid-template-columns: repeat(3, 10px);
+    grid-template-rows: repeat(4, 10px);
+    font-size: 1rem;
+  }
+  .Link {
+    font-size: 3rem;
+  }
 }

@@ -20,7 +20,7 @@ const UsersList = props => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container UsersList">
       {users
         ? users
             .filter(user => user.name !== context.user.name)

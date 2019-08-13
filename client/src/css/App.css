@@ -63,6 +63,7 @@
 }
 
 .Button {
+  width: auto;
   margin: 2rem;
   border: 0;
   padding: 2rem;

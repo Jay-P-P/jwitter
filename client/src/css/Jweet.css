@@ -2,7 +2,7 @@
   box-shadow: none;
   border-radius: 0;
   background-color: #fff;
-  width: 30vw;
+  min-width: 25vw;
 }
 
 .Jweet-User {
@@ -87,8 +87,8 @@
   font-style: italic;
 }
 
-@media only screen and (min-width: 3000px) {
+@media screen and (min-width: 900px) {
   .Jweet-Box {
-    width: 20vw;
+    max-width: 30vw;
   }
 }

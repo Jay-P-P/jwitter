@@ -56,7 +56,7 @@
   padding: 1rem;
 }
 
-.NavBar-Link:visited {
+.NavBar-Link:active, .NavBar-Link:visited {
   color: inherit;
 }
 

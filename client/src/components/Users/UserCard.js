@@ -8,6 +8,7 @@ import LoadingCircle from '../LoadingCircle';
 import '../../css/UserCard.css';
 import '../../css/Jweet.css';
 import '../../css/App.css';
+import Avatar from './Avatar';
 
 const UserCard = props => {
   let context = useContext(UserContext);
@@ -15,7 +16,7 @@ const UserCard = props => {
   const [accountExists, setAccountExists] = useState(true);
   const [userStateLoaded, setUserStateLoaded] = useState(false);
   const [jweetsCount, setJweetsCount] = useState(0);
-  const { followers, following, name, bio } = userState;
+  const { followers, following, name, bio, avatar } = userState;
 
   const buttonStyles = {
     canFollow: 'UserCard-Button UserCard-ButtonFollow',
@@ -70,48 +71,59 @@ const UserCard = props => {
         classNames="UserCard-Box"
         mountOnEnter
       >
-        <div className="whiteBox UserCard-Box">
-          <div className="UserCard-Heading">
-            <Link className="link" to={`/${name}`}>
-              <h1 className="Heading">{name ? name : null}</h1>
+        <span className="UserCard-Box">
+          <Avatar className="UserCard-Avatar" url={avatar} />
+          <div className="UserCard-Info" />
+          <Link className="link UserCard-Name" to={`/${name}`}>
+            <h1>{name ? name : null}</h1>
+          </Link>
+          {bio ? <p className="UserCard-Bio">{bio ? bio : null}</p> : null}
+
+          {context.user.name === name ? (
+            <Link
+              className="link UserCard-Button UserCard-Edit"
+              to="/user/profile"
+            >
+              Edit Profile
             </Link>
-
-            {bio ? <p className="UserCard-Bio">{bio ? bio : null}</p> : null}
-
-            {context.user.name === name ? (
-              <Link
-                className="link UserCard-Button UserCard-Edit"
-                to="/user/profile"
-              >
-                Edit Profile
-              </Link>
-            ) : (
-              <FollowButton buttonStyles={buttonStyles} name={name} />
-            )}
-          </div>
-          <div className="UserCard-StatBox">
-            <h3 className="UserCard-StatHeading">
-              Followers
-              <span className="UserCard-Stat">
-                {followers ? followers.length : 0}
-              </span>
-            </h3>
-
-            <h3 className="UserCard-StatHeading">
-              Following
-              <span className="UserCard-Stat">
-                {following ? following.length : 0}
-              </span>
-            </h3>
-
-            <h3 className="UserCard-StatHeading">
-              Jweets
+          ) : (
+            <FollowButton buttonStyles={buttonStyles} name={name} />
+          )}
+          <h3 className="UserCard-StatHeading">
+            <div>
               <span className="UserCard-Stat">
                 {jweetsCount ? jweetsCount : 0}
-              </span>
-            </h3>
-          </div>
-        </div>
+              </span>{' '}
+              Jweets
+            </div>
+            <div>
+              <span className="UserCard-Stat">
+                {followers ? followers.length : 0}
+              </span>{' '}
+              Followers
+            </div>
+            <div>
+              <span className="UserCard-Stat">
+                {following ? following.length : 0}
+              </span>{' '}
+              Following
+            </div>
+          </h3>
+
+          {/* <h3 className="UserCard-StatHeading">
+            <span className="UserCard-Stat">
+              {following ? following.length : 0}
+            </span>{' '}
+            Following
+          </h3>
+
+          <h3 className="UserCard-StatHeading">
+            <span className="UserCard-Stat">
+              {jweetsCount ? jweetsCount : 0}
+            </span>{' '}
+            Jweets
+          </h3> */}
+        </span>
       </CSSTransition>
     </>
   ) : (

@@ -1,13 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import InputBar from '../InputBar';
 import TextArea from '../TextArea';
 import UserContext from './UserContext';
 import '../../css/UserEditProfile.css';
+import Avatar from './Avatar';
 
 const UserEditProfile = props => {
   const { history } = props;
   let userContext = useContext(UserContext);
+  const fileInput = useRef(null);
+  const avatarForm = useRef(null);
+  let [image, setImage] = useState(() => {
+    return userContext.user.avatar;
+  });
+
   const [formData, setFormData] = useState(() => {
     return {
       name: userContext.user.name,
@@ -32,7 +39,6 @@ const UserEditProfile = props => {
     };
 
     const body = JSON.stringify(newUser);
-    console.log(body);
     try {
       let response = await axios.patch(`/api/users`, body);
       if (response.status === 204) {
@@ -47,8 +53,43 @@ const UserEditProfile = props => {
     }
   };
 
+  const uploadProfile = async e => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append('avatar', fileInput.current.files[0]);
+    let response = await axios.post('/api/users/avatar', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    setImage(response.data.avatar);
+    await userContext.updateUser(name);
+    history.push('/home');
+  };
+
   return (
     <div className="container">
+      <form
+        onSubmit={e => uploadProfile(e)}
+        method="POST"
+        name="avatar"
+        encType="multipart/form-data"
+        className="whiteBox UserEditProfile-Avatar-Form"
+        ref={avatarForm}
+      >
+        <h1 className="Heading">Update Avatar</h1>
+        <Avatar className="UserEditProfile-Avatar" url={image} />
+        <input
+          className="UserEditProfile-Avatar-InputBar"
+          type="file"
+          accept="image/*"
+          name="avatar"
+          ref={fileInput}
+        />
+        <button className="Button UserEditProfile-SaveBtn" type="submit">
+          Save
+        </button>
+      </form>
       <form onSubmit={e => updateProfile(e)} className="whiteBox">
         <h1 className="Heading">Update Profile</h1>
         <InputBar

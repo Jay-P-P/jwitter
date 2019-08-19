@@ -67,7 +67,6 @@
 .Landing-RegisterBtn, .Landing-LoginBtn {
   border-radius: 20px;
   box-shadow: 0px 5px 5px -3px black;
-  width: 50%;
 }
 
 .Landing-RegisterBtn {

@@ -1,0 +1,5 @@
+.Avatar-Img {
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+}

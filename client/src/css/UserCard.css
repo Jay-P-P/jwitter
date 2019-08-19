@@ -1,6 +1,30 @@
 .UserCard-Box {
-  max-width: 300px;
-  min-width: 200px;
+  display: grid;
+  grid-template-columns: min-content min-content 1fr;
+  grid-template-rows: repeat(6, max-content);
+}
+
+.UserCard-Avatar {
+  grid-area: 1 / 1 / 3 / 3;
+  width: 10rem;
+  height: 10rem;
+  display: block;
+  align-self: center;
+  transform: scale(1);
+  margin: 0 1rem;
+  border: 5px solid #0bf;
+  z-index: 1;
+}
+
+.UserCard-Info {
+  grid-area: 2 / 1 / 8 / 5;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: white;
+  color: black;
+  display: flex;
+  flex-flow: column wrap;
 }
 
 .UserCard-Box-enter {
@@ -12,42 +36,56 @@
   transition: all 500ms ease-in-out;
 }
 
-.UserCard-Heading {
+/* .UserCard-Heading {
   background-color: black;
   color: white;
+  grid-area: 1 / 3 / 2 / 5;
   width: 100%;
-  height: 40%;
-  border-radius: 15px 15px 0 0;
+  padding: 1rem;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+} */
+
+.UserCard-Name {
+  grid-area: 2 / 3 / 3 / 4;
+  font-size: 1.6rem;
+  margin: 1rem;
 }
 
-.UserCard-StatBox {
+.UserCard-Bio {
+  grid-area: 3 / 1 / 4 / 4;
+  color: black;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
   width: 100%;
-  height: 60%;
-  padding: 2rem;
-  font-size: 2rem;
+  word-wrap: break-word;
+  margin: 1rem auto;
+}
+
+/* .UserCard-StatBox {
+  width: 100%;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-}
+  justify-content: center;
+} */
 
 .UserCard-Stat {
   color: #888;
-  float: right;
-  padding-left: 1rem;
 }
 
 .UserCard-Button {
-  align-self: flex-end;
-  padding: 1rem;
-  margin: 0.5rem;
+  grid-area: 4 / 1 / 5 / 3;
+  padding: 0.5rem;
   font-weight: 800;
   font-size: 1.6rem;
-  color: white;
-  border-radius: 25px;
+  margin: 1rem;
+  color: black;
+  border-radius: 20px;
   box-shadow: none;
-  border: 1px solid white;
+  border: 1px solid black;
 }
 
 .UserCard-ButtonFollow {
@@ -55,7 +93,7 @@
 }
 
 .UserCard-ButtonFollow:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #0bf;
 }
 
 .UserCard-ButtonFollow:active {
@@ -63,8 +101,8 @@
 }
 
 .UserCard-ButtonFollowing {
-  background: white;
-  color: black;
+  background: black;
+  color: white;
 }
 
 .UserCard-ButtonFollowing:hover {
@@ -75,18 +113,12 @@
 
 .UserCard-StatHeading {
   width: 100%;
-}
-
-.UserCard-Bio {
-  padding: 1rem 2rem;
-  color: white;
   font-size: 1.4rem;
-  max-width: 100%;
-  word-wrap: break-word;
-  margin: 0 auto;
+  padding: 1rem;
+  grid-area: 4 / 3 / 5 / 4;
 }
 
 .UserCard-Edit:hover {
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
 }

@@ -8,6 +8,23 @@
   border-radius: 15px;
 }
 
+.UserEditProfile-Avatar-Form {
+  width: 100%;
+}
+
+.UserEditProfile-Avatar-InputBar {
+  display: block;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.UserEditProfile-Avatar {
+  margin: 1rem auto;
+  display: block;
+  width: 10rem;
+  height: 10rem;
+}
+
 .UserEditProfile-SaveBtn:active {
   box-shadow: none;
 }

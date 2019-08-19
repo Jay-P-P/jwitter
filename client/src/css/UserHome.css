@@ -1,5 +1,5 @@
 .UserHome-Grid {
-  grid-template-columns: auto auto;
+  grid-template-columns: minmax(200px, 300px) auto;
   align-content: flex-start;
   align-items: flex-start;
   height: auto;

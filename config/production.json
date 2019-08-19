@@ -3,5 +3,7 @@
   "secretOrKey":
     "SECRETORKEY",
   "jwtIssuer": "JWT_ISSUER",
-  "jwtAudience": "JWT_AUDIENCE"
+  "jwtAudience": "JWT_AUDIENCE",
+  "AWS-AccessKey": "AWS_ACCESSKEY",
+  "AWS-SecretKey": "AWS_SECRETKEY"
 }

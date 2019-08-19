@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator/check');
+const { AWS, bucketName, endpoint } = require('../config/aws');
+const s3 = new AWS.S3();
 
 const UsersController = {
   GetAllUsers: async (req, res, next) => {
@@ -22,10 +24,10 @@ const UsersController = {
 
     const { name } = req.params;
 
-    let user = await User.findOne(
-      { name },
-      'name followers following bio email'
-    ).populate('followers following', 'name');
+    let user = await User.findOne({ name }, '-password').populate(
+      'followers following',
+      'name'
+    );
 
     if (!user) {
       return res.status(404).json({
@@ -182,6 +184,27 @@ const UsersController = {
 
     await userToUpdate.save();
     return res.status(204).json();
+  },
+  UploadPicture: async (req, res, next) => {
+    let params = {
+      ACL: 'public-read',
+      Bucket: bucketName,
+      ContentType: req.file.mimetype,
+      ContentEncoding: req.file.encoding,
+      Key: String(req.user._id),
+      Body: req.file.buffer
+    };
+    if (req.file) {
+      s3.upload(params, async function(err, data) {
+        if (err) console.log(err);
+        else {
+          let user = await User.findById(req.user._id);
+          user.avatar = `${endpoint}${String(req.user._id)}`;
+          await user.save();
+          res.status(200).json({ avatar: user.avatar });
+        }
+      });
+    }
   }
 };
 

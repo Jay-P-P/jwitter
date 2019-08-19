@@ -1,3 +1,7 @@
 .UsersList {
-  align-items: stretch;
+  margin-top: 100px;
+  width: 90%;
+  grid-template-columns: repeat(auto-fit, max-content);
+  grid-gap: 25px;
+  justify-items: center;
 }

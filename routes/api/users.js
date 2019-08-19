@@ -1,5 +1,8 @@
 const express = require('express');
 const passport = require('passport');
+const multer = require('multer');
+
+const upload = multer();
 
 //Validators
 const {
@@ -22,6 +25,13 @@ router.post('/login', LoginValidator, LoginController);
 router.get('/', UsersController.GetAllUsers);
 
 router.get('/:name', UserValidator.nameValidator, UsersController.GetUser);
+
+router.post(
+  '/avatar',
+  passport.authenticate('jwt', { session: false }),
+  upload.single('avatar'),
+  UsersController.UploadPicture
+);
 
 router.get(
   '/:name/followers',

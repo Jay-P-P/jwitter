@@ -7,6 +7,10 @@ const UserSchema = new Schema({
     required: true,
     lowercase: true
   },
+  avatar: {
+    type: String,
+    default: 'https://jwitterapp.s3.us-east-2.amazonaws.com/default.png'
+  },
   bio: {
     type: String,
     default: ''

@@ -6,6 +6,7 @@ import LikeJweetButton from './LikeJweetButton';
 import '../../css/App.css';
 import '../../css/Jweet.css';
 import RejweetButton from './RejweetButton';
+import Avatar from '../Users/Avatar';
 
 const Jweet = props => {
   const [jweet, setJweet] = useState({ ...props.jweet });
@@ -20,6 +21,7 @@ const Jweet = props => {
       <div className="Jweet-User">
         {user ? (
           <div className="Jweet-Name">
+            <Avatar className="Jweet-Avatar" url={user.avatar} />
             <Link className="link" to={`/${user.name}`}>
               {`${user.name}`}
             </Link>

@@ -16,11 +16,11 @@ const JweetsController = {
     let followingList = user.following;
 
     let likedJweets = await Like.find({ user: { $in: followingList } })
-      .populate('user', 'name')
+      .populate('user', 'name avatar')
       .populate('jweet', 'user');
 
     let rejweetedJweets = await Rejweet.find({ user: { $in: followingList } })
-      .populate('user', 'name')
+      .populate('user', 'name avatar')
       .populate('jweet', 'user');
 
     let response = [];
@@ -78,7 +78,7 @@ const JweetsController = {
       return res.status(404).json({ userNotFound: 'User does not exist.' });
     }
     let jweets = await Jweet.find({ user: user.id })
-      .populate('user', 'name')
+      .populate('user', 'name avatar')
       .populate({
         path: 'likes',
         populate: {
@@ -97,7 +97,7 @@ const JweetsController = {
     let response = [...jweets];
 
     let rejweetedJweets = await Rejweet.find({ user: user.id })
-      .populate('user', 'name')
+      .populate('user', 'name avatar')
       .populate('jweet', 'user');
 
     rejweetedJweets.map(Rejweet => {
@@ -131,7 +131,7 @@ const JweetsController = {
     await jweet.save();
 
     let response = await Jweet.findById(jweet.id)
-      .populate('user', 'name')
+      .populate('user', 'name avatar')
       .populate({
         path: 'likes',
         populate: {
@@ -284,7 +284,7 @@ const JweetsController = {
     }
 
     let jweet = await Jweet.findById(id)
-      .populate('user', 'name')
+      .populate('user', 'name avatar')
       .populate({
         path: 'likes',
         populate: {

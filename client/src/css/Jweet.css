@@ -5,6 +5,14 @@
   min-width: 25vw;
 }
 
+.Jweet-Avatar {
+  width: 3rem;
+  height: 3rem;
+  display: inline-block;
+  margin-right: 1rem;
+  vertical-align: text-bottom;
+}
+
 .Jweet-User {
   width: 100%;
 }
@@ -16,11 +24,13 @@
 .Jweet-Name {
   padding: 0.5rem 2rem;
   font-size: 1.6rem;
+  width: 50%;
 }
 
 .Jweet-Date {
   padding: 1rem 0;
   color: #dac;
+  width: 25%;
 }
 
 .Jweet-TextBox {

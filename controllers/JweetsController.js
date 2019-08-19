@@ -41,7 +41,7 @@ const JweetsController = {
     });
 
     let jweets = await Jweet.find({ user: { $in: followingList } })
-      .populate('user', 'name')
+      .populate('user', 'name avatar')
       .populate({
         path: 'likes',
         populate: {

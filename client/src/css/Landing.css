@@ -1,23 +1,24 @@
 .Landing-Grid {
   grid-template-columns: 1fr 1fr;
-  grid-template-areas: 
-    "Heading Heading"
-    "Register Login"
-    "Alternative Alternative";
+  grid-template-rows: repeat(3, max-content);
   justify-items: center;
-  height: auto;
 }
 
 .Landing-Heading, .Landing-Alternative {
-  grid-area: Heading;
+  grid-area: 1 / 1 / 2 / 3;
   text-align: center;
   font-size: 5rem;
   width: 50vw;
 }
 
+.Landing-Heading {
+  align-self: flex-end;
+}
+
 .Landing-Alternative {
   font-size: 2.5rem;
-  grid-area: Alternative;
+  grid-area: 3 / 1 / 4 / 3;
+  align-self: flex-start;
 }
 
 .Landing-Special {
@@ -70,13 +71,13 @@
 }
 
 .Landing-RegisterBtn {
-  grid-area: Register;
+  grid-area: 2 / 1 / 3 / 2;
   justify-self: flex-end;
   background-color: hsl(0, 50%, 50%);
 }
 
 .Landing-LoginBtn {
-  grid-area: Login;
+  grid-area: 2 / 2 / 3 / 3;
   justify-self: flex-start;
   background-color: hsl(240, 50%, 50%);
 }

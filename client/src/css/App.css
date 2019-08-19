@@ -21,11 +21,11 @@
 
 .link {
   text-decoration: none;
-  color: inherit;
+  color: black;
 }
 
 .link:visited {
-  color: inherit;
+  color: black;
 }
 
 .input, .textarea {

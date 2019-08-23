@@ -31,7 +31,7 @@ const TextArea = props => {
         placeholder={placeHolder}
         name={name}
         value={value}
-        onChange={e => props.useInput(e)}
+        onChange={e => props.onChangeHandler(e)}
         onKeyPressCapture={e => shortcutSubmit(e)}
       />
     </label>

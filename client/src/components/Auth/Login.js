@@ -64,7 +64,7 @@ const Login = props => {
           className="RegisterInputBar"
           name="email"
           value={email}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >
@@ -78,7 +78,7 @@ const Login = props => {
           className="RegisterInputBar"
           name="password"
           value={password}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >

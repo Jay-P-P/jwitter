@@ -71,7 +71,7 @@ const UserCard = props => {
         classNames="UserCard-Box"
         mountOnEnter
       >
-        <span className="UserCard-Box">
+        <div className="UserCard-Box">
           <Avatar className="UserCard-Avatar" url={avatar} />
           <div className="UserCard-Info" />
           <Link className="link UserCard-Name" to={`/${name}`}>
@@ -109,21 +109,7 @@ const UserCard = props => {
               Following
             </div>
           </h3>
-
-          {/* <h3 className="UserCard-StatHeading">
-            <span className="UserCard-Stat">
-              {following ? following.length : 0}
-            </span>{' '}
-            Following
-          </h3>
-
-          <h3 className="UserCard-StatHeading">
-            <span className="UserCard-Stat">
-              {jweetsCount ? jweetsCount : 0}
-            </span>{' '}
-            Jweets
-          </h3> */}
-        </span>
+        </div>
       </CSSTransition>
     </>
   ) : (

@@ -1,7 +1,25 @@
 .UsersList {
-  margin-top: 100px;
-  width: 90%;
-  grid-template-columns: repeat(auto-fit, max-content);
-  grid-gap: 25px;
+  margin: 2rem;
+  width: 85%;
   justify-items: center;
+  display: grid;
+  grid: auto-flow dense / repeat(auto-fit, 300px);
+  grid-gap: 25px;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-start;
+}
+
+.UsersList-Container {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 85%;
+  margin: 2rem auto;
+  align-items: center;
+}
+
+.UsersList-SearchBar {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  padding: 2rem;
 }

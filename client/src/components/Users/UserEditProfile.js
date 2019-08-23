@@ -98,7 +98,7 @@ const UserEditProfile = props => {
           className="UserEditProfile-InputBar"
           name="name"
           value={name}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >
@@ -112,7 +112,7 @@ const UserEditProfile = props => {
           className="UserEditProfile-InputBar"
           name="email"
           value={email}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >
@@ -128,7 +128,7 @@ const UserEditProfile = props => {
           cols="30"
           rows="5"
           maxlength="140"
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         />

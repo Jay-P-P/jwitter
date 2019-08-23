@@ -50,7 +50,7 @@ const ComposeJweet = props => {
           name="text"
           value={text}
           maxlength="140"
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
           onSubmit={postJweet}

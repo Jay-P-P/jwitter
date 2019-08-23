@@ -53,7 +53,7 @@ const Register = props => {
           labelName="Username"
           name="name"
           value={name}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
           className="RegisterInputBar"
@@ -67,7 +67,7 @@ const Register = props => {
           labelName="Email"
           name="email"
           value={email}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
           className="RegisterInputBar"
@@ -81,7 +81,7 @@ const Register = props => {
           labelName="Password"
           name="password"
           value={password}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
           className="RegisterInputBar"
@@ -96,7 +96,7 @@ const Register = props => {
           name="passwordConfirmation"
           className="RegisterInputBar"
           value={passwordConfirmation}
-          useInput={e =>
+          onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
         >

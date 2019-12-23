@@ -1,15 +1,15 @@
 .Login-LoginBtn {
-  background-color: hsl(240, 50%, 50%);
   margin-left: auto;
   margin-right: auto;
   width: 80%;
-  box-shadow: 0px 3px 5px -1px black;
+  color: #000;
+  border: 2px solid #000;
   transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   border-radius: 15px;
 }
 
 .Login-LoginBtn:hover {
-  background-color: hsl(240, 50%, 40%);
+  background-color: #0bf;
 }
 
 .Login-LoginBtn:active {

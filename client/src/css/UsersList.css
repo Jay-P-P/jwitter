@@ -3,7 +3,7 @@
   width: 85%;
   justify-items: center;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: repeat(auto-fit, minmax(0, 300px));
   grid-gap: 25px;
   justify-content: center;
   align-content: center;

@@ -1,7 +1,8 @@
 .UserHome-Grid {
-  grid-template-columns: minmax(200px, 300px) auto;
+  grid-template-columns: 100px repeat(2, minmax(0, 1fr)) 100px ;
   align-content: flex-start;
   align-items: flex-start;
+  grid-gap: 20px;
   height: auto;
 }
 
@@ -9,9 +10,40 @@
   justify-self: stretch;
 }
 
+.UserHome-Grid .UserCard-Box, .UserHome-Grid .UserCard-404, .UserHome-Grid .LoadingCircle {
+  grid-area: 1 / 2 / 2 / 3;
+}
+
+.UserCard-404 {
+  margin-top: calc(10rem / 2);
+}
+
+.UserHome-Grid .UserHome-Timeline {
+  grid-area: 1 / 3 / 2 / 4;
+  margin-top: calc(10rem / 2);
+}
+
+@media only screen and (max-width: 900px) {
+  .UserHome-Grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr;
+    justify-items: center;
+  }
+
+  .UserHome-Grid .UserCard-Box, .UserHome-Grid .UserCard-404 {
+    grid-area: 1 / 1 / 2 / 1;
+  }
+
+  .UserHome-Grid .UserHome-Timeline {
+    grid-area: 2 / 1 / 3 / 1;
+    margin: 0;
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .UserHome-Grid {
-    grid: auto-flow / 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr;
     justify-items: center;
   }
 }

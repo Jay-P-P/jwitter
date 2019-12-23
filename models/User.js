@@ -39,6 +39,12 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'users'
     }
+  ],
+  jweets: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'jweets'
+    }
   ]
 });
 

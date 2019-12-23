@@ -10,6 +10,7 @@ import UserContext from './UserContext';
 
 const UserProfile = props => {
   const { name } = props.match.params;
+  const [userState, setUserState] = useState({});
   const [jweets, setJweets] = useState([]);
   const [jweetsLoaded, setJweetsLoaded] = useState(false);
   let userContext = useContext(UserContext);
@@ -21,13 +22,18 @@ const UserProfile = props => {
           return;
         }
         let response = await axios.get(`/api/jweets/user/${name}`);
+        let user = await axios.get(`/api/users/${name}`);
         if (response.status === 200) {
           setJweetsLoaded(true);
           setJweets(response.data.jweets);
         }
+        if (user.status === 200) {
+          setUserState({ ...user.data });
+        }
       } catch (err) {
         if (err.response.status === 404) {
           setJweetsLoaded(true);
+          setUserState({ userNotFound: true });
         }
       }
     };
@@ -38,7 +44,7 @@ const UserProfile = props => {
     <Redirect to="/home" />
   ) : (
     <div className="container UserHome-Grid">
-      <UserCard paramName={name} />
+      <UserCard user={userState} />
       <div className="UserHome-Timeline">
         <CSSTransition timeout={1000} classNames="UserHomeList">
           <JweetsList jweetsLoaded={jweetsLoaded} jweets={jweets} />

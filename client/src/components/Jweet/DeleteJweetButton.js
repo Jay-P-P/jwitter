@@ -21,7 +21,7 @@ const DeleteJweetButton = props => {
         <button
           ref={button}
           onMouseOver={() => (button.current.innerText = 'Delete')}
-          onMouseLeave={() => (button.current.innerText = 'x')}
+          onMouseLeave={() => (button.current.innerHTML = '&times;')}
           onClick={() => deleteJweet()}
         >
           &times;

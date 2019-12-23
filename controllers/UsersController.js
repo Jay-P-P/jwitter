@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Jweet = require('../models/Jweet');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator/check');
 const { AWS, bucketName, endpoint } = require('../config/aws');
@@ -6,9 +7,12 @@ const s3 = new AWS.S3();
 
 const UsersController = {
   GetAllUsers: async (req, res, next) => {
+    let result = [];
     let users = await User.find()
-      .select('name')
+      .select('-password -email')
+      .populate('followers following jweets', 'name')
       .sort('-1');
+
     if (!users) {
       return res
         .status(404)
@@ -21,23 +25,10 @@ const UsersController = {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.mapped() });
     }
-
     const { name } = req.params;
+    let result = await getUser(name);
 
-    let user = await User.findOne({ name }, '-password').populate(
-      'followers following',
-      'name'
-    );
-
-    if (!user) {
-      return res.status(404).json({
-        errors: {
-          userNotFound:
-            'That user account has either been deleted or never existed.'
-        }
-      });
-    }
-    res.status(200).json(user);
+    res.status(200).json(result);
   },
   GetFollowers: async (req, res, next) => {
     const errors = validationResult(req).formatWith(errorFormatter);
@@ -207,5 +198,46 @@ const UsersController = {
     }
   }
 };
+
+async function getUser(name) {
+  let result = {};
+
+  let user = await User.findOne({ name }, '-password').populate(
+    'followers following',
+    'name'
+  );
+
+  if (!user) {
+    return res.status(404).json({
+      errors: {
+        userNotFound:
+          'That user account has either been deleted or never existed.'
+      }
+    });
+  }
+
+  result = user.toObject();
+
+  let jweets = await Jweet.find({ user: user.id })
+    .populate('user', 'name avatar')
+    .populate({
+      path: 'likes',
+      populate: {
+        path: 'user',
+        select: 'name'
+      }
+    })
+    .populate({
+      path: 'rejweets',
+      populate: {
+        path: 'user',
+        select: 'name'
+      }
+    });
+
+  result.jweets = jweets;
+
+  return result;
+}
 
 module.exports = UsersController;

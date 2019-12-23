@@ -3,40 +3,32 @@ import PropTypes from 'prop-types';
 import '../css/App.css';
 
 const InputBar = props => {
-  const {
-    inputType,
-    labelName,
-    className,
-    placeHolder,
-    name,
-    value,
-    children
-  } = props;
+  const { labelProps, inputProps, labelName, children } = props;
 
   return (
-    <label className="label">
+    <label {...labelProps} className="label">
       {labelName}
-      <input
-        type={inputType}
-        className={`input ${className}`}
-        placeholder={placeHolder}
-        name={name}
-        value={value}
-        onChange={e => props.onChangeHandler(e)}
-      />
+      <input {...inputProps} className={`input ${inputProps.className}`} />
       {children}
     </label>
   );
 };
 
 InputBar.propTypes = {
-  type: PropTypes.string.isRequired,
-  labelName: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  placeHolder: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  onChangeHandler: PropTypes.func.isRequired
+  inputProps: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    ariaLabelledby: PropTypes.string,
+    role: PropTypes.string
+  }),
+  labelProps: PropTypes.shape({
+    role: PropTypes.string
+  }),
+  labelName: PropTypes.string.isRequired
 };
 
 export default InputBar;

@@ -59,28 +59,30 @@ const Login = props => {
           <p className="Error">{validationErrors['login']}</p>
         )}
         <InputBar
-          inputType="text"
+          inputProps={{
+            type: 'text',
+            className: 'RegisterInputBar',
+            name: 'email',
+            value: email,
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Email"
-          className="RegisterInputBar"
-          name="email"
-          value={email}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
         >
           {validationErrors['email'] && (
             <p className="Error">{validationErrors['email']}</p>
           )}
         </InputBar>
         <InputBar
-          inputType="password"
+          inputProps={{
+            type: 'password',
+            name: 'password',
+            value: password,
+            className: 'RegisterInputBar',
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Password"
-          className="RegisterInputBar"
-          name="password"
-          value={password}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
         >
           {validationErrors['password'] && (
             <p className="Error">{validationErrors['password']}</p>

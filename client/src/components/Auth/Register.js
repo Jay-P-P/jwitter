@@ -49,56 +49,60 @@ const Register = props => {
       <form className="whiteBox Register-Form" onSubmit={e => onSubmit(e)}>
         <h1 className="Heading">Register</h1>
         <InputBar
-          inputType="text"
+          inputProps={{
+            type: 'text',
+            name: 'name',
+            value: name,
+            className: 'RegisterInputBar',
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Username"
-          name="name"
-          value={name}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
-          className="RegisterInputBar"
         >
           {validationErrors['name'] && (
             <p className="Error">{validationErrors['name']}</p>
           )}
         </InputBar>
         <InputBar
-          inputType="text"
+          inputProps={{
+            type: 'email',
+            name: 'email',
+            value: email,
+            className: 'RegisterInputBar',
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Email"
-          name="email"
-          value={email}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
-          className="RegisterInputBar"
         >
           {validationErrors['email'] && (
             <p className="Error">{validationErrors['email']}</p>
           )}
         </InputBar>
         <InputBar
-          inputType="password"
+          inputProps={{
+            type: 'password',
+            name: 'password',
+            value: password,
+            className: 'RegisterInputBar',
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Password"
-          name="password"
-          value={password}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
-          className="RegisterInputBar"
         >
           {validationErrors['password'] && (
             <p className="Error">{validationErrors['password']}</p>
           )}
         </InputBar>
         <InputBar
-          inputType="password"
+          inputProps={{
+            type: 'password',
+            name: 'passwordConfirmation',
+            value: passwordConfirmation,
+            className: 'RegisterInputBar',
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Re-enter Password"
-          name="passwordConfirmation"
-          className="RegisterInputBar"
-          value={passwordConfirmation}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
         >
           {validationErrors['passwordConfirmation'] && (
             <p className="Error">{validationErrors['passwordConfirmation']}</p>

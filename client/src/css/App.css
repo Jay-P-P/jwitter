@@ -21,11 +21,11 @@
 
 .link {
   text-decoration: none;
-  color: black;
+  color: currentColor;
 }
 
 .link:visited {
-  color: black;
+  color: currentColor;
 }
 
 .input, .textarea {

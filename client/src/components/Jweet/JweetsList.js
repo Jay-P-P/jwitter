@@ -30,7 +30,7 @@ const JweetsList = props => {
             <LikedJweet jweet={jweet} />
             <DeleteJweetButton
               onDelete={deleteJweet}
-              jweetAuthor={jweet.user.name}
+              jweetAuthor={jweet.user ? jweet.user.name : 'User Deleted'}
               id={jweet._id}
             />
           </section>
@@ -40,7 +40,7 @@ const JweetsList = props => {
               <RejweetedJweet jweet={jweet} />
               <DeleteJweetButton
                 onDelete={deleteJweet}
-                jweetAuthor={jweet.user.name}
+                jweetAuthor={jweet.user ? jweet.user.name : 'User Deleted'}
                 id={jweet._id}
                 index={index}
               />
@@ -50,7 +50,7 @@ const JweetsList = props => {
               <Jweet jweet={jweet} />
               <DeleteJweetButton
                 onDelete={deleteJweet}
-                jweetAuthor={jweet.user.name}
+                jweetAuthor={jweet.user ? jweet.user.name : 'User Deleted'}
                 id={jweet._id}
                 index={index}
               />

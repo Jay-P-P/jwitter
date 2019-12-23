@@ -1,41 +1,41 @@
 .Jweet-Box {
   box-shadow: none;
   border-radius: 0;
-  background-color: #fff;
-  min-width: 25vw;
+  padding: 2.5rem;
 }
 
 .Jweet-Avatar {
   width: 3rem;
   height: 3rem;
-  display: inline-block;
+  display: block;
   margin-right: 1rem;
-  vertical-align: text-bottom;
 }
 
 .Jweet-User {
   width: 100%;
+  display: flex;
+  margin-top: 0.5rem;
 }
 
-.Jweet-User > * {
-  display: inline-block;
-}
 
 .Jweet-Name {
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 0;
   font-size: 1.6rem;
   width: 50%;
+  display: flex;
+  overflow: hidden;
 }
 
 .Jweet-Date {
   padding: 1rem 0;
   color: #dac;
-  width: 25%;
+  width: 50%;
+  text-align: right;
 }
 
 .Jweet-TextBox {
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
 }
 
 .Jweet-Text {
@@ -50,7 +50,7 @@
 .Jweet-StatBox {
   text-align: center;
   width: 100%;
-  padding: 1.5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .Jweet-StatBox .Jweet-StatHeading {
@@ -65,16 +65,8 @@
   color: inherit;
 }
 
-.Jweet-Button:focus,
-.Jweet-Button:hover,
-.Jweet-Button:active {
-  outline: none;
-  cursor: pointer;
-  color: #dac;
-}
-
 .Jweet-Liked, .Jweet-Rejweeted {
-  color: #dac;
+  color: #000;
 }
 
 .Jweet-Liked:hover, .Jweet-Rejweeted:hover {
@@ -84,9 +76,16 @@
 .Jweet-LikedName,
 .Jweet-RejweetedName {
   font-style: italic;
+  padding: 0.5rem 1rem;
   width: 100%;
   color: black;
-  background: rgb(255, 255, 255);
+}
+
+.Jweet-Button:focus .Jweet-Symbol,
+.Jweet-Button:hover .Jweet-Symbol, 
+.Jweet-Button:active .Jweet-Symbol {
+  cursor: pointer;
+  color: #dac;
 }
 
 .Jweet-Symbol {
@@ -98,7 +97,7 @@
 }
 
 @media screen and (min-width: 900px) {
-  .Jweet-Box {
+  /* .Jweet-Box {
     max-width: 30vw;
-  }
+  } */
 }

@@ -93,28 +93,30 @@ const UserEditProfile = props => {
       <form onSubmit={e => updateProfile(e)} className="whiteBox">
         <h1 className="Heading">Update Profile</h1>
         <InputBar
-          inputType="text"
+          inputProps={{
+            type: 'text',
+            name: 'name',
+            value: name,
+            className: 'UserEditProfile-InputBar',
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Name"
-          className="UserEditProfile-InputBar"
-          name="name"
-          value={name}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
         >
           {validationErrors['name'] && (
             <p className="Error">{validationErrors['name']}</p>
           )}
         </InputBar>
         <InputBar
-          inputType="text"
+          inputProps={{
+            type: 'email',
+            name: 'email',
+            value: email,
+            className: 'UserEditProfile-InputBar',
+            onChange: e =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+          }}
           labelName="Email"
-          className="UserEditProfile-InputBar"
-          name="email"
-          value={email}
-          onChangeHandler={e =>
-            setFormData({ ...formData, [e.target.name]: e.target.value })
-          }
         >
           {validationErrors['email'] && (
             <p className="Error">{validationErrors['email']}</p>

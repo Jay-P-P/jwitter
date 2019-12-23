@@ -20,13 +20,17 @@ const Jweet = props => {
     <div className="Jweet-Box">
       <div className="Jweet-User">
         {user ? (
-          <div className="Jweet-Name">
+          <>
             <Avatar className="Jweet-Avatar" url={user.avatar} />
-            <Link className="link" to={`/${user.name}`}>
-              {`${user.name}`}
-            </Link>
-          </div>
-        ) : null}
+            <div className="Jweet-Name">
+              <Link className="link" to={`/${user.name}`}>
+                {`${user.name}`}
+              </Link>
+            </div>
+          </>
+        ) : (
+          <div className="Jweet-Name">User Deleted</div>
+        )}
         {date && <JweetTime date={date} />}
       </div>
       <div className="Jweet-TextBox">

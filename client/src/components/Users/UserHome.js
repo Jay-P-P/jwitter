@@ -30,7 +30,7 @@ const UserHome = props => {
           }
         }
       } catch (err) {
-        if (err.response.status === 404) {
+        if (err && err.response && err.response.status === 404) {
           setJweetsLoaded(true);
         }
       }
@@ -63,7 +63,7 @@ const UserHome = props => {
     <div className="container UserHome-Grid">
       {loginContext.isLoggedIn ? (
         <Fragment>
-          <UserCard paramName={userContext.user.name} />
+          <UserCard user={userContext.user} />
           <div className="UserHome-Timeline">
             <ComposeJweet onPostJweet={updateJweets} />
             <JweetsList

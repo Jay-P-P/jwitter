@@ -11,6 +11,8 @@ const ComposeJweet = props => {
     text: ''
   });
 
+  const MAX_LENGTH = 140;
+
   const formRef = useRef(null);
 
   let userContext = useContext(UserContext);
@@ -49,12 +51,15 @@ const ComposeJweet = props => {
           className="ComposeJweet-TextArea"
           name="text"
           value={text}
-          maxlength="140"
+          maxlength={MAX_LENGTH}
           onChangeHandler={e =>
             setFormData({ ...formData, [e.target.name]: e.target.value })
           }
           onSubmit={postJweet}
         />
+        <p className="ComposeJweet-CharRemaining">
+          Characters remaining: {MAX_LENGTH - formData.text.length}
+        </p>
         <button className="ComposeJweet-Button">Jweet!</button>
       </form>
     </div>

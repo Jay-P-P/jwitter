@@ -10,6 +10,7 @@ const JweetsRouter = require('./routes/api/jweets');
 
 const app = express();
 const mongoURI = process.env.MONGO_URI || config.get('mongoURI');
+mongoose.set('useFindAndModify', false);
 const db = mongoose
   .connect(mongoURI, { useNewUrlParser: true })
   .then(() => {})

@@ -58,7 +58,9 @@ const UsersList = props => {
                 .filter(
                   user =>
                     context.user.name !== user.name &&
-                    user.name.includes(searchTerm)
+                    user.name
+                      .toLowerCase()
+                      .includes(searchTerm.toLocaleLowerCase())
                 )
                 .map(user => <UserCard key={user._id} user={user} />)
             : ''}

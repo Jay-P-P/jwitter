@@ -131,12 +131,7 @@ const JweetsController = {
     await jweet.save();
 
     // Add jweet to the User.jweets array.
-    await User.findByIdAndUpdate(
-      id,
-      { $push: { jweets: jweet._id } },
-      { new: true, upsert: true },
-      (err, res) => console.log(err)
-    );
+    await User.updateOne({ _id: id }, { $push: { jweets: jweet._id } });
 
     let response = await Jweet.findById(jweet.id)
       .populate('user', 'name avatar')
@@ -264,14 +259,8 @@ const JweetsController = {
     let user = await User.findById(userId);
 
     // remove jweet from jweets list.
-    let filteredJweets = new Array(user.jweets).filter(_id => _id != id);
-    await User.findByIdAndUpdate(
-      userId,
-      {
-        $set: { jweets: filteredJweets }
-      },
-      (err, res) => console.log(err)
-    );
+    let filteredJweets = user.jweets.filter(_id => _id != id);
+    await user.updateOne({ $set: { jweets: filteredJweets } });
 
     let jweet = await Jweet.findById(id);
     if (String(jweet.user) === String(userId)) {
